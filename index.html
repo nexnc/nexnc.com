@@ -1,16 +1,2059 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="index.css">
-<script>
-    window.screen.height
-    window.screen.width
-</script>
-<html>
-    <head>
-        <title>Home</title>
-        <link rel="icon" href="main_logo.svg" type="image/x-icon">
-    </head>
-    
-    <body>
-        <p>[admin@nexnc.com ~] $ <input type="text"> </p> 
-    </body>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexnc</title>
+    <script src="Nexnc_files/3.2.4"></script>
+    <script defer="defer" src="Nexnc_files/cdn.min.js"></script>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+    <style>
+      /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
+      *,
+      ::after,
+      ::before {
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+        border-color: #e5e7eb;
+      }
+      ::after,
+      ::before {
+        --tw-content: "";
+      }
+      html {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        -moz-tab-size: 4;
+        tab-size: 4;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Noto Color Emoji";
+        font-feature-settings: normal;
+      }
+      body {
+        margin: 0;
+        line-height: inherit;
+      }
+      hr {
+        height: 0;
+        color: inherit;
+        border-top-width: 1px;
+      }
+      abbr:where([title]) {
+        -webkit-text-decoration: underline dotted;
+        text-decoration: underline dotted;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+      b,
+      strong {
+        font-weight: bolder;
+      }
+      code,
+      kbd,
+      pre,
+      samp {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 1em;
+      }
+      small {
+        font-size: 80%;
+      }
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+      }
+      sub {
+        bottom: -0.25em;
+      }
+      sup {
+        top: -0.5em;
+      }
+      table {
+        text-indent: 0;
+        border-color: inherit;
+        border-collapse: collapse;
+      }
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        font-family: inherit;
+        font-size: 100%;
+        font-weight: inherit;
+        line-height: inherit;
+        color: inherit;
+        margin: 0;
+        padding: 0;
+      }
+      button,
+      select {
+        text-transform: none;
+      }
+      [type="button"],
+      [type="reset"],
+      [type="submit"],
+      button {
+        -webkit-appearance: button;
+        background-color: transparent;
+        background-image: none;
+      }
+      :-moz-focusring {
+        outline: auto;
+      }
+      :-moz-ui-invalid {
+        box-shadow: none;
+      }
+      progress {
+        vertical-align: baseline;
+      }
+      ::-webkit-inner-spin-button,
+      ::-webkit-outer-spin-button {
+        height: auto;
+      }
+      [type="search"] {
+        -webkit-appearance: textfield;
+        outline-offset: -2px;
+      }
+      ::-webkit-search-decoration {
+        -webkit-appearance: none;
+      }
+      ::-webkit-file-upload-button {
+        -webkit-appearance: button;
+        font: inherit;
+      }
+      summary {
+        display: list-item;
+      }
+      blockquote,
+      dd,
+      dl,
+      figure,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      hr,
+      p,
+      pre {
+        margin: 0;
+      }
+      fieldset {
+        margin: 0;
+        padding: 0;
+      }
+      legend {
+        padding: 0;
+      }
+      menu,
+      ol,
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      textarea {
+        resize: vertical;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        opacity: 1;
+        color: #9ca3af;
+      }
+      [role="button"],
+      button {
+        cursor: pointer;
+      }
+      :disabled {
+        cursor: default;
+      }
+      audio,
+      canvas,
+      embed,
+      iframe,
+      img,
+      object,
+      svg,
+      video {
+        display: block;
+        vertical-align: middle;
+      }
+      img,
+      video {
+        max-width: 100%;
+        height: auto;
+      }
+      [hidden] {
+        display: none;
+      }
+      *,
+      ::before,
+      ::after {
+        --tw-border-spacing-x: 0;
+        --tw-border-spacing-y: 0;
+        --tw-translate-x: 0;
+        --tw-translate-y: 0;
+        --tw-rotate: 0;
+        --tw-skew-x: 0;
+        --tw-skew-y: 0;
+        --tw-scale-x: 1;
+        --tw-scale-y: 1;
+        --tw-pan-x: ;
+        --tw-pan-y: ;
+        --tw-pinch-zoom: ;
+        --tw-scroll-snap-strictness: proximity;
+        --tw-ordinal: ;
+        --tw-slashed-zero: ;
+        --tw-numeric-figure: ;
+        --tw-numeric-spacing: ;
+        --tw-numeric-fraction: ;
+        --tw-ring-inset: ;
+        --tw-ring-offset-width: 0px;
+        --tw-ring-offset-color: #fff;
+        --tw-ring-color: rgb(59 130 246 / 0.5);
+        --tw-ring-offset-shadow: 0 0 #0000;
+        --tw-ring-shadow: 0 0 #0000;
+        --tw-shadow: 0 0 #0000;
+        --tw-shadow-colored: 0 0 #0000;
+        --tw-blur: ;
+        --tw-brightness: ;
+        --tw-contrast: ;
+        --tw-grayscale: ;
+        --tw-hue-rotate: ;
+        --tw-invert: ;
+        --tw-saturate: ;
+        --tw-sepia: ;
+        --tw-drop-shadow: ;
+        --tw-backdrop-blur: ;
+        --tw-backdrop-brightness: ;
+        --tw-backdrop-contrast: ;
+        --tw-backdrop-grayscale: ;
+        --tw-backdrop-hue-rotate: ;
+        --tw-backdrop-invert: ;
+        --tw-backdrop-opacity: ;
+        --tw-backdrop-saturate: ;
+        --tw-backdrop-sepia: ;
+      }
+      ::-webkit-backdrop {
+        --tw-border-spacing-x: 0;
+        --tw-border-spacing-y: 0;
+        --tw-translate-x: 0;
+        --tw-translate-y: 0;
+        --tw-rotate: 0;
+        --tw-skew-x: 0;
+        --tw-skew-y: 0;
+        --tw-scale-x: 1;
+        --tw-scale-y: 1;
+        --tw-pan-x: ;
+        --tw-pan-y: ;
+        --tw-pinch-zoom: ;
+        --tw-scroll-snap-strictness: proximity;
+        --tw-ordinal: ;
+        --tw-slashed-zero: ;
+        --tw-numeric-figure: ;
+        --tw-numeric-spacing: ;
+        --tw-numeric-fraction: ;
+        --tw-ring-inset: ;
+        --tw-ring-offset-width: 0px;
+        --tw-ring-offset-color: #fff;
+        --tw-ring-color: rgb(59 130 246 / 0.5);
+        --tw-ring-offset-shadow: 0 0 #0000;
+        --tw-ring-shadow: 0 0 #0000;
+        --tw-shadow: 0 0 #0000;
+        --tw-shadow-colored: 0 0 #0000;
+        --tw-blur: ;
+        --tw-brightness: ;
+        --tw-contrast: ;
+        --tw-grayscale: ;
+        --tw-hue-rotate: ;
+        --tw-invert: ;
+        --tw-saturate: ;
+        --tw-sepia: ;
+        --tw-drop-shadow: ;
+        --tw-backdrop-blur: ;
+        --tw-backdrop-brightness: ;
+        --tw-backdrop-contrast: ;
+        --tw-backdrop-grayscale: ;
+        --tw-backdrop-hue-rotate: ;
+        --tw-backdrop-invert: ;
+        --tw-backdrop-opacity: ;
+        --tw-backdrop-saturate: ;
+        --tw-backdrop-sepia: ;
+      }
+      ::backdrop {
+        --tw-border-spacing-x: 0;
+        --tw-border-spacing-y: 0;
+        --tw-translate-x: 0;
+        --tw-translate-y: 0;
+        --tw-rotate: 0;
+        --tw-skew-x: 0;
+        --tw-skew-y: 0;
+        --tw-scale-x: 1;
+        --tw-scale-y: 1;
+        --tw-pan-x: ;
+        --tw-pan-y: ;
+        --tw-pinch-zoom: ;
+        --tw-scroll-snap-strictness: proximity;
+        --tw-ordinal: ;
+        --tw-slashed-zero: ;
+        --tw-numeric-figure: ;
+        --tw-numeric-spacing: ;
+        --tw-numeric-fraction: ;
+        --tw-ring-inset: ;
+        --tw-ring-offset-width: 0px;
+        --tw-ring-offset-color: #fff;
+        --tw-ring-color: rgb(59 130 246 / 0.5);
+        --tw-ring-offset-shadow: 0 0 #0000;
+        --tw-ring-shadow: 0 0 #0000;
+        --tw-shadow: 0 0 #0000;
+        --tw-shadow-colored: 0 0 #0000;
+        --tw-blur: ;
+        --tw-brightness: ;
+        --tw-contrast: ;
+        --tw-grayscale: ;
+        --tw-hue-rotate: ;
+        --tw-invert: ;
+        --tw-saturate: ;
+        --tw-sepia: ;
+        --tw-drop-shadow: ;
+        --tw-backdrop-blur: ;
+        --tw-backdrop-brightness: ;
+        --tw-backdrop-contrast: ;
+        --tw-backdrop-grayscale: ;
+        --tw-backdrop-hue-rotate: ;
+        --tw-backdrop-invert: ;
+        --tw-backdrop-opacity: ;
+        --tw-backdrop-saturate: ;
+        --tw-backdrop-sepia: ;
+      }
+      .container {
+        width: 100%;
+      }
+      @media (min-width: 640px) {
+        .container {
+          max-width: 640px;
+        }
+      }
+      @media (min-width: 768px) {
+        .container {
+          max-width: 768px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .container {
+          max-width: 1024px;
+        }
+      }
+      @media (min-width: 1280px) {
+        .container {
+          max-width: 1280px;
+        }
+      }
+      @media (min-width: 1536px) {
+        .container {
+          max-width: 1536px;
+        }
+      }
+      .fixed {
+        position: fixed;
+      }
+      .absolute {
+        position: absolute;
+      }
+      .relative {
+        position: relative;
+      }
+      .inset-0 {
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+      }
+      .top-0 {
+        top: 0px;
+      }
+      .left-0 {
+        left: 0px;
+      }
+      .bottom-0 {
+        bottom: 0px;
+      }
+      .-right-40 {
+        right: -10rem;
+      }
+      .top-8 {
+        top: 2rem;
+      }
+      .top-1\/2 {
+        top: 50%;
+      }
+      .left-1\/2 {
+        left: 50%;
+      }
+      .right-0 {
+        right: 0px;
+      }
+      .z-50 {
+        z-index: 50;
+      }
+      .z-10 {
+        z-index: 10;
+      }
+      .-m-2 {
+        margin: -0.5rem;
+      }
+      .-m-8 {
+        margin: -2rem;
+      }
+      .-m-1 {
+        margin: -0.25rem;
+      }
+      .-m-2\.5 {
+        margin: -0.625rem;
+      }
+      .-m-4 {
+        margin: -1rem;
+      }
+      .-m-5 {
+        margin: -1.25rem;
+      }
+      .-m-1\.5 {
+        margin: -0.375rem;
+      }
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .mr-14 {
+        margin-right: 3.5rem;
+      }
+      .ml-2 {
+        margin-left: 0.5rem;
+      }
+      .mr-16 {
+        margin-right: 4rem;
+      }
+      .mr-9 {
+        margin-right: 2.25rem;
+      }
+      .mb-12 {
+        margin-bottom: 3rem;
+      }
+      .mb-6 {
+        margin-bottom: 1.5rem;
+      }
+      .mb-11 {
+        margin-bottom: 2.75rem;
+      }
+      .mb-20 {
+        margin-bottom: 5rem;
+      }
+      .mb-5 {
+        margin-bottom: 1.25rem;
+      }
+      .mb-10 {
+        margin-bottom: 2.5rem;
+      }
+      .ml-auto {
+        margin-left: auto;
+      }
+      .mr-2\.5 {
+        margin-right: 0.625rem;
+      }
+      .mb-3 {
+        margin-bottom: 0.75rem;
+      }
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+      .mr-2 {
+        margin-right: 0.5rem;
+      }
+      .block {
+        display: block;
+      }
+      .inline-block {
+        display: inline-block;
+      }
+      .flex {
+        display: flex;
+      }
+      .inline-flex {
+        display: inline-flex;
+      }
+      .hidden {
+        display: none;
+      }
+      .h-8 {
+        height: 2rem;
+      }
+      .h-full {
+        height: 100%;
+      }
+      .h-14 {
+        height: 3.5rem;
+      }
+      .w-auto {
+        width: auto;
+      }
+      .w-full {
+        width: 100%;
+      }
+      .w-4\/6 {
+        width: 66.666667%;
+      }
+      .w-14 {
+        width: 3.5rem;
+      }
+      .w-8 {
+        width: 2rem;
+      }
+      .max-w-max {
+        max-width: max-content;
+      }
+      .flex-1 {
+        flex: 1 1 0%;
+      }
+      .-translate-x-1\/2 {
+        --tw-translate-x: -50%;
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+          rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
+          skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
+          scaleY(var(--tw-scale-y));
+      }
+      .-translate-y-1\/2 {
+        --tw-translate-y: -50%;
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+          rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
+          skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
+          scaleY(var(--tw-scale-y));
+      }
+      .transform {
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+          rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
+          skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
+          scaleY(var(--tw-scale-y));
+      }
+      .flex-col {
+        flex-direction: column;
+      }
+      .flex-wrap {
+        flex-wrap: wrap;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .justify-end {
+        justify-content: flex-end;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .justify-between {
+        justify-content: space-between;
+      }
+      .overflow-hidden {
+        overflow: hidden;
+      }
+      .overflow-y-auto {
+        overflow-y: auto;
+      }
+      .rounded-xl {
+        border-radius: 0.75rem;
+      }
+      .rounded-full {
+        border-radius: 9999px;
+      }
+      .rounded-2xl {
+        border-radius: 1rem;
+      }
+      .border {
+        border-width: 1px;
+      }
+      .border-b {
+        border-bottom-width: 1px;
+      }
+      .border-indigo-700 {
+        --tw-border-opacity: 1;
+        border-color: rgb(67 56 202 / var(--tw-border-opacity));
+      }
+      .border-gray-300 {
+        --tw-border-opacity: 1;
+        border-color: rgb(209 213 219 / var(--tw-border-opacity));
+      }
+      .border-white {
+        --tw-border-opacity: 1;
+        border-color: rgb(255 255 255 / var(--tw-border-opacity));
+      }
+      .border-opacity-20 {
+        --tw-border-opacity: 0.2;
+      }
+      .bg-\[\#F8FAFC\] {
+        --tw-bg-opacity: 1;
+        background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+      }
+      .bg-indigo-600 {
+        --tw-bg-opacity: 1;
+        background-color: rgb(79 70 229 / var(--tw-bg-opacity));
+      }
+      .bg-gray-800 {
+        --tw-bg-opacity: 1;
+        background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+      }
+      .bg-white {
+        --tw-bg-opacity: 1;
+        background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+      }
+      .bg-green-100 {
+        --tw-bg-opacity: 1;
+        background-color: rgb(220 252 231 / var(--tw-bg-opacity));
+      }
+      .bg-transparent {
+        background-color: transparent;
+      }
+      .bg-indigo-100 {
+        --tw-bg-opacity: 1;
+        background-color: rgb(224 231 255 / var(--tw-bg-opacity));
+      }
+      .bg-opacity-90 {
+        --tw-bg-opacity: 0.9;
+      }
+      .p-2 {
+        padding: 0.5rem;
+      }
+      .p-8 {
+        padding: 2rem;
+      }
+      .p-1 {
+        padding: 0.25rem;
+      }
+      .p-2\.5 {
+        padding: 0.625rem;
+      }
+      .p-4 {
+        padding: 1rem;
+      }
+      .p-5 {
+        padding: 1.25rem;
+      }
+      .p-1\.5 {
+        padding: 0.375rem;
+      }
+      .px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .py-5 {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+      }
+      .py-3 {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+      .px-5 {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+      .px-6 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+      .py-2 {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      .py-16 {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+      .px-2 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .py-1 {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+      }
+      .py-4 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+      .px-9 {
+        padding-left: 2.25rem;
+        padding-right: 2.25rem;
+      }
+      .py-36 {
+        padding-top: 9rem;
+        padding-bottom: 9rem;
+      }
+      .py-28 {
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+      }
+      .py-7 {
+        padding-top: 1.75rem;
+        padding-bottom: 1.75rem;
+      }
+      .px-10 {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+      .py-64 {
+        padding-top: 16rem;
+        padding-bottom: 16rem;
+      }
+      .pt-8 {
+        padding-top: 2rem;
+      }
+      .pb-8 {
+        padding-bottom: 2rem;
+      }
+      .pt-16 {
+        padding-top: 4rem;
+      }
+      .pt-24 {
+        padding-top: 6rem;
+      }
+      .pb-28 {
+        padding-bottom: 7rem;
+      }
+      .pt-28 {
+        padding-top: 7rem;
+      }
+      .pb-36 {
+        padding-bottom: 9rem;
+      }
+      .pb-9 {
+        padding-bottom: 2.25rem;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .font-sans {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Noto Color Emoji";
+      }
+      .text-2xl {
+        font-size: 1.5rem;
+        line-height: 2rem;
+      }
+      .text-sm {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      .text-6xl {
+        font-size: 3.75rem;
+        line-height: 1;
+      }
+      .text-lg {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+      .text-xl {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+      .font-bold {
+        font-weight: 700;
+      }
+      .font-medium {
+        font-weight: 500;
+      }
+      .font-semibold {
+        font-weight: 600;
+      }
+      .uppercase {
+        text-transform: uppercase;
+      }
+      .leading-none {
+        line-height: 1;
+      }
+      .leading-tight {
+        line-height: 1.25;
+      }
+      .leading-normal {
+        line-height: 1.5;
+      }
+      .leading-relaxed {
+        line-height: 1.625;
+      }
+      .leading-snug {
+        line-height: 1.375;
+      }
+      .tracking-wider {
+        letter-spacing: 0.05em;
+      }
+      .text-gray-900 {
+        --tw-text-opacity: 1;
+        color: rgb(17 24 39 / var(--tw-text-opacity));
+      }
+      .text-white {
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
+      }
+      .text-indigo-600 {
+        --tw-text-opacity: 1;
+        color: rgb(79 70 229 / var(--tw-text-opacity));
+      }
+      .text-gray-600 {
+        --tw-text-opacity: 1;
+        color: rgb(75 85 99 / var(--tw-text-opacity));
+      }
+      .text-gray-500 {
+        --tw-text-opacity: 1;
+        color: rgb(107 114 128 / var(--tw-text-opacity));
+      }
+      .text-opacity-90 {
+        --tw-text-opacity: 0.9;
+      }
+      .opacity-80 {
+        opacity: 0.8;
+      }
+      .shadow-2xl {
+        --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+          var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+      }
+      .transition {
+        transition-property: color, background-color, border-color, fill, stroke,
+          opacity, box-shadow, transform, filter, -webkit-text-decoration-color,
+          -webkit-backdrop-filter;
+        transition-property: color, background-color, border-color,
+          text-decoration-color, fill, stroke, opacity, box-shadow, transform,
+          filter, backdrop-filter;
+        transition-property: color, background-color, border-color,
+          text-decoration-color, fill, stroke, opacity, box-shadow, transform,
+          filter, backdrop-filter, -webkit-text-decoration-color,
+          -webkit-backdrop-filter;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+      .duration-200 {
+        transition-duration: 200ms;
+      }
+      .ease-in-out {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .hover\:border-gray-400:hover {
+        --tw-border-opacity: 1;
+        border-color: rgb(156 163 175 / var(--tw-border-opacity));
+      }
+      .hover\:border-opacity-40:hover {
+        --tw-border-opacity: 0.4;
+      }
+      .hover\:bg-indigo-700:hover {
+        --tw-bg-opacity: 1;
+        background-color: rgb(67 56 202 / var(--tw-bg-opacity));
+      }
+      .hover\:bg-gray-100:hover {
+        --tw-bg-opacity: 1;
+        background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+      }
+      .hover\:bg-black:hover {
+        --tw-bg-opacity: 1;
+        background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+      }
+      .hover\:bg-opacity-5:hover {
+        --tw-bg-opacity: 0.05;
+      }
+      .hover\:text-gray-700:hover {
+        --tw-text-opacity: 1;
+        color: rgb(55 65 81 / var(--tw-text-opacity));
+      }
+      .focus\:ring:focus {
+        --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+          var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+        --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+          calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+        box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+          var(--tw-shadow, 0 0 #0000);
+      }
+      .focus\:ring-indigo-300:focus {
+        --tw-ring-opacity: 1;
+        --tw-ring-color: rgb(165 180 252 / var(--tw-ring-opacity));
+      }
+      .focus\:ring-gray-50:focus {
+        --tw-ring-opacity: 1;
+        --tw-ring-color: rgb(249 250 251 / var(--tw-ring-opacity));
+      }
+      .focus\:ring-gray-300:focus {
+        --tw-ring-opacity: 1;
+        --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
+      }
+      .focus\:ring-white:focus {
+        --tw-ring-opacity: 1;
+        --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
+      }
+      .focus\:ring-opacity-40:focus {
+        --tw-ring-opacity: 0.4;
+      }
+      @media (min-width: 640px) {
+        .sm\:max-w-xs {
+          max-width: 20rem;
+        }
+      }
+      @media (min-width: 768px) {
+        .md\:block {
+          display: block;
+        }
+        .md\:inline-block {
+          display: inline-block;
+        }
+        .md\:w-auto {
+          width: auto;
+        }
+        .md\:w-1\/3 {
+          width: 33.333333%;
+        }
+        .md\:w-1\/2 {
+          width: 50%;
+        }
+        .md\:w-56 {
+          width: 14rem;
+        }
+        .md\:max-w-xl {
+          max-width: 36rem;
+        }
+        .md\:max-w-md {
+          max-width: 28rem;
+        }
+        .md\:max-w-lg {
+          max-width: 32rem;
+        }
+        .md\:max-w-xs {
+          max-width: 20rem;
+        }
+        .md\:max-w-4xl {
+          max-width: 56rem;
+        }
+        .md\:text-7xl {
+          font-size: 4.5rem;
+          line-height: 1;
+        }
+      }
+      @media (min-width: 1024px) {
+        .lg\:block {
+          display: block;
+        }
+        .lg\:hidden {
+          display: none;
+        }
+        .lg\:w-1\/2 {
+          width: 50%;
+        }
+      }
+      @media (min-width: 1280px) {
+        .xl\:items-center {
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="header" class="bg-[#F8FAFC]" x-data="{ open: false }">
+      <div class="container mx-auto overflow-hidden">
+        <div class="flex items-center justify-between px-4 py-5 bg-[#F8FAFC]">
+          <div class="w-auto">
+            <div class="flex flex-wrap items-center">
+              <div class="w-auto mr-14">
+                <a
+                  class="max-w-max inline-flex items-center font-bold text-2xl text-gray-900 uppercase tracking-wider"
+                  href="#"
+                >
+                  <img class="h-8" src="Nexnc_files/logo.png" alt="" /><span
+                    class="ml-2"
+                    >Nexnc</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="w-auto">
+            <div class="flex flex-wrap items-center">
+              <div class="w-auto hidden lg:block">
+                <ul class="flex items-center mr-16">
+                  <li class="mr-9 font-medium hover:text-gray-700">
+                    <a href="#how-it-works">How it works</a>
+                  </li>
+                  <li class="mr-9 font-medium hover:text-gray-700">
+                    <a href="#features">Features</a>
+                  </li>
+                  <li class="font-medium hover:text-gray-700">
+                    <a href="#pricing">Pricing</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="w-auto hidden lg:block">
+                <div class="inline-block">
+                  <button
+                    class="py-3 px-5 w-full text-white font-semibold border border-indigo-700 rounded-xl focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
+                    type="button"
+                  >
+                    Try for Free
+                  </button>
+                </div>
+              </div>
+              <div class="w-auto lg:hidden">
+                <button type="button" @click="open = true">
+                  <svg
+                    class="text-indigo-600"
+                    width="51"
+                    height="51"
+                    viewBox="0 0 56 56"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      width="56"
+                      height="56"
+                      rx="28"
+                      fill="currentColor"
+                    ></rect>
+                    <path
+                      d="M37 32H19M37 24H19"
+                      stroke="white"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="fixed top-0 left-0 bottom-0 w-4/6 sm:max-w-xs z-50"
+          x-show="open"
+          x-transition=""
+          style="display: none"
+        >
+          <div class="fixed inset-0 bg-gray-800 opacity-80"></div>
+          <nav
+            class="relative z-10 px-6 pt-8 bg-white h-full overflow-y-auto"
+            @click.outside="open = false"
+          >
+            <div class="flex flex-wrap justify-between h-full">
+              <div class="w-full">
+                <div class="flex items-center justify-between -m-2">
+                  <div class="w-auto py-2">
+                    <a
+                      class="max-w-max inline-flex items-center font-bold text-2xl text-gray-900 uppercase tracking-wider"
+                      href="#"
+                    >
+                      <img class="h-8" src="Nexnc_files/logo.png" alt="" /><span
+                        class="ml-2"
+                        >Happy</span
+                      >
+                    </a>
+                  </div>
+                  <div class="w-auto p-2">
+                    <button type="button" @click="open = false">
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6 18L18 6M6 6L18 18"
+                          stroke="#111827"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col justify-center py-16 w-full">
+                <ul>
+                  <li class="mb-12">
+                    <a
+                      @click="open = false"
+                      class="font-medium hover:text-gray-700"
+                      href="#how-it-works"
+                      >How it works</a
+                    >
+                  </li>
+                  <li class="mb-12">
+                    <a
+                      @click="open = false"
+                      class="font-medium hover:text-gray-700"
+                      href="#features"
+                      >Features</a
+                    >
+                  </li>
+                  <li class="mb-12">
+                    <a
+                      @click="open = false"
+                      class="font-medium hover:text-gray-700"
+                      href="#pricing"
+                      >Pricing</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="flex flex-col justify-end w-full pb-8">
+                <div class="flex flex-wrap">
+                  <div class="w-full">
+                    <div class="block">
+                      <button
+                        class="py-3 px-5 w-full text-white font-semibold border border-indigo-700 rounded-xl focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
+                        type="button"
+                      >
+                        Try 14 Days Free Trial
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="overflow-hidden pt-16">
+        <div class="container px-4 mx-auto">
+          <div class="flex flex-wrap -m-8">
+            <div class="w-full lg:w-1/2 p-8">
+              <div
+                class="inline-block mb-6 px-2 py-1 font-semibold bg-green-100 rounded-full"
+              >
+                <div class="flex flex-wrap items-center -m-1">
+                  <div class="w-auto p-1">
+                    <a class="text-sm" href=""
+                      >👋 We are hiring! View open roles</a
+                    >
+                  </div>
+                  <div class="w-auto p-1">
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 15 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8.66667 3.41675L12.75 7.50008M12.75 7.50008L8.66667 11.5834M12.75 7.50008L2.25 7.50008"
+                        stroke="black"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <h1
+                class="mb-6 text-6xl md:text-7xl font-bold font-heading md:max-w-xl leading-none"
+              >
+                Nexnc is the largest datacenter provider in India.
+              </h1>
+              <p class="mb-11 text-lg text-gray-900 font-medium md:max-w-md">
+                We provide hosting services for Websites, Game Servers, VPNs,
+                VPS' for the cheapest price in the market
+              </p>
+              <div class="flex flex-wrap -m-2.5 mb-20">
+                <div class="w-full md:w-auto p-2.5">
+                  <div class="block">
+                    <button
+                      class="py-4 px-6 w-full text-white font-semibold border border-indigo-700 rounded-xl focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
+                      type="button"
+                    >
+                      Try it for free
+                    </button>
+                  </div>
+                </div>
+                <div class="w-full md:w-auto p-2.5">
+                  <div class="block">
+                    <button
+                      class="py-4 px-9 w-full font-semibold border border-gray-300 hover:border-gray-400 rounded-xl focus:ring focus:ring-gray-50 bg-transparent hover:bg-gray-100 transition ease-in-out duration-200"
+                      type="button"
+                    >
+                      <div
+                        class="flex flex-wrap justify-center items-center -m-1"
+                      >
+                        <div class="w-auto p-1">
+                          <svg
+                            width="19"
+                            height="18"
+                            viewBox="0 0 19 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M2.75 3.75C2.75 2.92157 3.42157 2.25 4.25 2.25H6.70943C7.03225 2.25 7.31886 2.45657 7.42094 2.76283L8.5443 6.13291C8.66233 6.48699 8.50203 6.87398 8.1682 7.0409L6.47525 7.88737C7.30194 9.72091 8.77909 11.1981 10.6126 12.0247L11.4591 10.3318C11.626 9.99796 12.013 9.83767 12.3671 9.9557L15.7372 11.0791C16.0434 11.1811 16.25 11.4677 16.25 11.7906V14.25C16.25 15.0784 15.5784 15.75 14.75 15.75H14C7.7868 15.75 2.75 10.7132 2.75 4.5V3.75Z"
+                              stroke="black"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="w-auto p-1">
+                          <span>Book a call</span>
+                        </div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full lg:w-1/2 p-8">
+              <img
+                class="transform rounded-xl"
+                src="Nexnc_files/photo-1519681393784-d120267933ba.avif"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="pt-24 pb-28 bg-white overflow-hidden">
+      <div class="container px-4 mx-auto">
+        <h2
+          class="mb-5 text-6xl md:text-7xl text-center font-bold font-heading tracking-px-n leading-tight"
+        >
+          Our Datacenters are located in
+        </h2>
+        <p
+          class="mb-20 text-lg text-gray-900 text-center font-medium md:max-w-lg mx-auto"
+        >
+          North America, South America, Europe, Asia Pacific, South East Asia,
+          Southern Africa
+        </p>
+        <div class="flex flex-wrap -m-8">
+          <div class="w-full md:w-1/3 p-8">
+            <div class="relative text-center">
+              <img
+                class="absolute -right-40 top-8 hidden md:block"
+                src="Nexnc_files/line.svg"
+                alt=""
+              />
+              <div
+                class="relative w-14 h-14 mb-10 mx-auto text-2xl font-bold font-heading bg-indigo-100 rounded-full"
+              >
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                >
+                  <svg
+                    width="25"
+                    height="24"
+                    viewBox="0 0 25 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M21.5391 21L15.5391 15M17.5391 10C17.5391 13.866 14.4051 17 10.5391 17C6.67307 17 3.53906 13.866 3.53906 10C3.53906 6.13401 6.67307 3 10.5391 3C14.4051 3 17.5391 6.13401 17.5391 10Z"
+                      stroke="#111827"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="md:max-w-xs mx-auto">
+                <h3
+                  class="mb-5 font-heading text-xl font-bold font-heading leading-normal"
+                >
+                  Best Pricing
+                </h3>
+                <p class="font-sans text-gray-600">
+                  We offer lowest pricing in the industry due to the fact the we
+                  have one of the largest datacenters.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full md:w-1/3 p-8">
+            <div class="relative text-center">
+              <img
+                class="absolute -right-40 top-8 hidden md:block"
+                src="Nexnc_files/line.svg"
+                alt=""
+              />
+              <div
+                class="relative w-14 h-14 mb-10 mx-auto text-2xl font-bold font-heading bg-indigo-600 rounded-full"
+              >
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M17 14V20M14 17H20M6 10H8C9.10457 10 10 9.10457 10 8V6C10 4.89543 9.10457 4 8 4H6C4.89543 4 4 4.89543 4 6V8C4 9.10457 4.89543 10 6 10ZM16 10H18C19.1046 10 20 9.10457 20 8V6C20 4.89543 19.1046 4 18 4H16C14.8954 4 14 4.89543 14 6V8C14 9.10457 14.8954 10 16 10ZM6 20H8C9.10457 20 10 19.1046 10 18V16C10 14.8954 9.10457 14 8 14H6C4.89543 14 4 14.8954 4 16V18C4 19.1046 4.89543 20 6 20Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="md:max-w-xs mx-auto">
+                <h3
+                  class="mb-5 font-heading text-xl font-bold font-heading leading-normal"
+                >
+                  Fastest Servers
+                </h3>
+                <p class="font-sans text-gray-600">
+                  Our Servers are fastest with lowest latency wherever possible.
+                  Thanks to our industy grade Networking equipment.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="w-full md:w-1/3 p-8">
+            <div class="text-center">
+              <div
+                class="relative w-14 h-14 mb-10 mx-auto text-2xl font-bold font-heading bg-indigo-100 rounded-full"
+              >
+                <div
+                  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                >
+                  <svg
+                    width="25"
+                    height="24"
+                    viewBox="0 0 25 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.4609 11C11.9087 11 11.4609 11.4477 11.4609 12C11.4609 12.5523 11.9087 13 12.4609 13V11ZM15.4609 13C16.0132 13 16.4609 12.5523 16.4609 12C16.4609 11.4477 16.0132 11 15.4609 11V13ZM12.4609 15C11.9087 15 11.4609 15.4477 11.4609 16C11.4609 16.5523 11.9087 17 12.4609 17V15ZM15.4609 17C16.0132 17 16.4609 16.5523 16.4609 16C16.4609 15.4477 16.0132 15 15.4609 15V17ZM9.46094 11C8.90865 11 8.46094 11.4477 8.46094 12C8.46094 12.5523 8.90865 13 9.46094 13V11ZM9.47094 13C10.0232 13 10.4709 12.5523 10.4709 12C10.4709 11.4477 10.0232 11 9.47094 11V13ZM9.46094 15C8.90865 15 8.46094 15.4477 8.46094 16C8.46094 16.5523 8.90865 17 9.46094 17V15ZM9.47094 17C10.0232 17 10.4709 16.5523 10.4709 16C10.4709 15.4477 10.0232 15 9.47094 15V17ZM18.4609 7V19H20.4609V7H18.4609ZM17.4609 20H7.46094V22H17.4609V20ZM6.46094 19V7H4.46094V19H6.46094ZM7.46094 6H9.46094V4H7.46094V6ZM15.4609 6H17.4609V4H15.4609V6ZM7.46094 20C6.90865 20 6.46094 19.5523 6.46094 19H4.46094C4.46094 20.6569 5.80408 22 7.46094 22V20ZM18.4609 19C18.4609 19.5523 18.0132 20 17.4609 20V22C19.1178 22 20.4609 20.6569 20.4609 19H18.4609ZM20.4609 7C20.4609 5.34315 19.1178 4 17.4609 4V6C18.0132 6 18.4609 6.44772 18.4609 7H20.4609ZM6.46094 7C6.46094 6.44772 6.90865 6 7.46094 6V4C5.80408 4 4.46094 5.34315 4.46094 7H6.46094ZM12.4609 13H15.4609V11H12.4609V13ZM12.4609 17H15.4609V15H12.4609V17ZM11.4609 4H13.4609V2H11.4609V4ZM13.4609 6H11.4609V8H13.4609V6ZM11.4609 6C10.9087 6 10.4609 5.55228 10.4609 5H8.46094C8.46094 6.65685 9.80408 8 11.4609 8V6ZM14.4609 5C14.4609 5.55228 14.0132 6 13.4609 6V8C15.1178 8 16.4609 6.65685 16.4609 5H14.4609ZM13.4609 4C14.0132 4 14.4609 4.44772 14.4609 5H16.4609C16.4609 3.34315 15.1178 2 13.4609 2V4ZM11.4609 2C9.80408 2 8.46094 3.34315 8.46094 5H10.4609C10.4609 4.44772 10.9087 4 11.4609 4V2ZM9.46094 13H9.47094V11H9.46094V13ZM9.46094 17H9.47094V15H9.46094V17Z"
+                      fill="#111827"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="md:max-w-xs mx-auto">
+                <h3
+                  class="mb-5 font-heading text-xl font-bold font-heading leading-normal"
+                >
+                  Secure Infrastructure
+                </h3>
+                <p class="font-sans text-gray-600">
+                  We offer the best network security in the industry by using
+                  end-to-end encryption between you and our servers.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="py-36 bg-white overflow-hidden">
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-wrap xl:items-center -m-8">
+          <div class="w-full md:w-1/2 p-8">
+            <img
+              class="rounded-xl"
+              src="Nexnc_files/photo-1534067783941-51c9c23ecefd.avif"
+              alt=""
+            />
+          </div>
+          <div class="w-full md:w-1/2 p-8">
+            <div class="md:max-w-md">
+              <div class="flex flex-wrap -m-4">
+                <div class="w-auto p-4">
+                  <div class="flex flex-wrap -m-2">
+                    <div class="w-auto p-2">
+                      <svg
+                        width="28"
+                        height="28"
+                        viewBox="0 0 28 28"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4.66669 5.83329C4.66669 5.18896 5.18902 4.66663 5.83335 4.66663H22.1667C22.811 4.66663 23.3334 5.18896 23.3334 5.83329V8.16663C23.3334 8.81096 22.811 9.33329 22.1667 9.33329H5.83335C5.18902 9.33329 4.66669 8.81096 4.66669 8.16663V5.83329Z"
+                          stroke="#6366F1"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M4.66669 15.1666C4.66669 14.5223 5.18902 14 5.83335 14H12.8334C13.4777 14 14 14.5223 14 15.1666V22.1666C14 22.811 13.4777 23.3333 12.8334 23.3333H5.83335C5.18902 23.3333 4.66669 22.811 4.66669 22.1666V15.1666Z"
+                          stroke="#6366F1"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M18.6667 15.1666C18.6667 14.5223 19.189 14 19.8334 14H22.1667C22.811 14 23.3334 14.5223 23.3334 15.1666V22.1666C23.3334 22.811 22.811 23.3333 22.1667 23.3333H19.8334C19.189 23.3333 18.6667 22.811 18.6667 22.1666V15.1666Z"
+                          stroke="#6366F1"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="flex-1 p-2">
+                      <h3 class="text-lg font-semibold">
+                        Unlimited Network Throughput
+                      </h3>
+                    </div>
+                    <div class="w-full p-2">
+                      <div class="pb-8 border-b">
+                        <p class="text-gray-600 font-medium leading-relaxed">
+                          We offer unlimited network throughput to and from our
+                          servers. As we have own sub-sea fibre-optics, Inhouse
+                          Fibre Equipment.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-auto p-4">
+                  <div class="flex flex-wrap -m-2">
+                    <div class="w-auto p-2">
+                      <svg
+                        width="28"
+                        height="28"
+                        viewBox="0 0 28 28"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M5.83333 14.0001H22.1667M5.83333 14.0001C4.54467 14.0001 3.5 12.9554 3.5 11.6667V7.00008C3.5 5.71142 4.54467 4.66675 5.83333 4.66675H22.1667C23.4553 4.66675 24.5 5.71142 24.5 7.00008V11.6667C24.5 12.9554 23.4553 14.0001 22.1667 14.0001M5.83333 14.0001C4.54467 14.0001 3.5 15.0448 3.5 16.3334V21.0001C3.5 22.2887 4.54467 23.3334 5.83333 23.3334H22.1667C23.4553 23.3334 24.5 22.2887 24.5 21.0001V16.3334C24.5 15.0448 23.4553 14.0001 22.1667 14.0001M19.8333 9.33342H19.845M19.8333 18.6667H19.845"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="flex-1 p-2">
+                      <h3 class="text-lg font-semibold">
+                        Up to 10 Petabytes of Storage
+                      </h3>
+                    </div>
+                    <div class="w-full p-2">
+                      <div class="pb-8 border-b">
+                        <p class="text-gray-600 font-medium leading-relaxed">
+                          We offer fastest SSD storage on our datacentres for
+                          the fastest data uplink and downlink.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-auto p-4">
+                  <div class="flex flex-wrap -m-2">
+                    <div class="w-auto p-2">
+                      <svg
+                        width="28"
+                        height="28"
+                        viewBox="0 0 28 28"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3.5 11.6666H24.5M8.16667 17.4999H9.33333M14 17.4999H15.1667M7 22.1666H21C22.933 22.1666 24.5 20.5996 24.5 18.6666V9.33325C24.5 7.40026 22.933 5.83325 21 5.83325H7C5.067 5.83325 3.5 7.40026 3.5 9.33325V18.6666C3.5 20.5996 5.067 22.1666 7 22.1666Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div class="flex-1 p-2">
+                      <h3 class="text-lg font-semibold">Secure Payments</h3>
+                    </div>
+                    <div class="w-full p-2">
+                      <p class="text-gray-600 font-medium leading-relaxed">
+                        Payments and your data reach to us by end-to-end
+                        encryption using 256-Bit Authentication between you and
+                        us. So you can feel confident using our services.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-28 bg-indigo-600 overflow-hidden">
+      <img
+        class="absolute bottom-0 right-0"
+        src="Nexnc_files/gradient.svg"
+        alt=""
+      />
+      <div class="relative z-10 container px-4 mx-auto">
+        <div class="flex flex-wrap items-center -m-8">
+          <div class="w-full md:w-1/2 p-8">
+            <h2
+              class="mb-5 text-6xl md:text-7xl text-white font-bold tracking-px-n leading-tight"
+            >
+              Ready to get started?
+            </h2>
+            <p class="text-white text-opacity-90 font-medium md:max-w-md">
+              Getting starting with us is very easy, Just select your plan and
+              you are good to go.
+            </p>
+          </div>
+          <div class="w-full md:w-1/2 p-8">
+            <div class="flex flex-wrap ml-auto md:w-56 -m-2">
+              <div class="w-full p-2">
+                <button
+                  class="py-4 px-6 w-full font-medium rounded-xl shadow-2xl focus:ring focus:ring-gray-300 bg-white hover:bg-gray-100 transition ease-in-out duration-200"
+                  type="button"
+                >
+                  Start for Free
+                </button>
+              </div>
+              <div class="w-full p-2">
+                <button
+                  class="inline-flex items-center justify-center py-4 px-6 w-full text-white font-medium border border-white border-opacity-20 hover:border-opacity-40 rounded-xl focus:ring focus:ring-white focus:ring-opacity-40 bg-transparent hover:bg-black hover:bg-opacity-5 transition ease-in-out duration-200"
+                  type="button"
+                >
+                  <svg
+                    class="mr-2.5"
+                    width="19"
+                    height="18"
+                    viewBox="0 0 19 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.75 3.75C2.75 2.92157 3.42157 2.25 4.25 2.25H6.70943C7.03225 2.25 7.31886 2.45657 7.42094 2.76283L8.5443 6.13291C8.66233 6.48699 8.50203 6.87398 8.1682 7.0409L6.47525 7.88737C7.30194 9.72091 8.77909 11.1981 10.6126 12.0247L11.4591 10.3318C11.626 9.99796 12.013 9.83767 12.3671 9.9557L15.7372 11.0791C16.0434 11.1811 16.25 11.4677 16.25 11.7906V14.25C16.25 15.0784 15.5784 15.75 14.75 15.75H14C7.7868 15.75 2.75 10.7132 2.75 4.5V3.75Z"
+                      stroke="white"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                  <span>Book a call</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="relative pt-28 pb-36 bg-white overflow-hidden">
+      <div class="relative z-10 container px-4 mx-auto">
+        <h2
+          class="mb-6 text-center text-6xl md:text-7xl xl:text-10xl font-bold font-heading leading-none mx-auto"
+        >
+          Simple Pricing
+        </h2>
+        <p
+          class="mb-20 text-lg text-gray-900 text-center font-medium leading-normal md:max-w-lg mx-auto"
+        >
+          Just plain simple pricing. That's it.
+        </p>
+        <div class="md:max-w-4xl mx-auto">
+          <div class="flex flex-wrap -m-5">
+            <div class="w-full md:w-1/2 p-5">
+              <div
+                class="bg-white bg-opacity-90 border border-blueGray-100 rounded-xl shadow-2xl"
+                style="backdrop-filter: blur(46px)"
+              >
+                <div class="border-b border-blueGray-100">
+                  <div class="py-7 px-9">
+                    <h3
+                      class="mb-3 text-xl text-gray-900 font-bold leading-snug"
+                    >
+                      Basic
+                    </h3>
+                    <p class="text-gray-500 font-medium leading-relaxed">
+                      Our basic plan, best for beginners.
+                    </p>
+                  </div>
+                </div>
+                <div class="pt-8 pb-9 px-9">
+                  <p class="mb-6 text-gray-600 font-medium leading-relaxed">
+                    Features included:
+                  </p>
+                  <ul class="mb-11">
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">4 Core vCPU</p>
+                    </li>
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">Weekly Backups</p>
+                    </li>
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">
+                        100 GB SSD Storage
+                      </p>
+                    </li>
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">8GB RAM</p>
+                    </li>
+                    <li class="flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">
+                        Premium Support
+                      </p>
+                    </li>
+                  </ul>
+                  <p
+                    class="mb-6 text-xl text-gray-500 font-semibold leading-normal"
+                  >
+                    <span>Starting from</span>
+                    <span class="text-gray-900">$19/mo</span>
+                  </p>
+                  <div class="md:inline-block">
+                    <button
+                      class="py-4 px-10 w-full text-white font-semibold rounded-xl focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
+                      type="button"
+                    >
+                      Get Started
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2 p-5">
+              <div
+                class="bg-white bg-opacity-90 border border-blueGray-100 rounded-2xl shadow-2xl"
+                style="backdrop-filter: blur(46px)"
+              >
+                <div class="border-b border-blueGray-100">
+                  <div class="py-7 px-9">
+                    <h3
+                      class="mb-3 text-xl text-gray-900 font-bold leading-snug"
+                    >
+                      Pro
+                    </h3>
+                    <p class="text-gray-500 font-medium leading-relaxed">
+                      Our Pro plan, for Pros.
+                    </p>
+                  </div>
+                </div>
+                <div class="pt-8 pb-9 px-9">
+                  <p class="mb-6 text-gray-600 font-medium leading-relaxed">
+                    Features included:
+                  </p>
+                  <ul class="mb-11">
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">16 Core vCPU</p>
+                    </li>
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">Daily Backups</p>
+                    </li>
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">
+                        1 TB SSD Storage
+                      </p>
+                    </li>
+                    <li class="mb-4 flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">32 GB RAM</p>
+                    </li>
+                    <li class="flex items-center">
+                      <svg
+                        class="mr-2"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M7.5 10L9.16667 11.6667L12.5 8.33333M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10Z"
+                          stroke="#4F46E5"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <p class="font-semibold leading-normal">
+                        Instant Support
+                      </p>
+                    </li>
+                  </ul>
+                  <p
+                    class="mb-6 text-xl text-gray-500 font-semibold leading-normal"
+                  >
+                    <span>Starting from</span>
+                    <span class="text-gray-900">$79/mo</span>
+                  </p>
+                  <div class="md:inline-block">
+                    <button
+                      class="py-4 px-10 w-full text-white font-semibold rounded-xl focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
+                      type="button"
+                    >
+                      Get Started
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 w-full py-64 bg-indigo-600"></div>
+    </section>
+
+    <section class="relative py-16 bg-white overflow-hidden">
+      <img
+        class="absolute top-0 left-0 h-full"
+        src="Nexnc_files/footer-gradient.svg"
+        alt=""
+      />
+      <div class="relative z-10 container px-4 mx-auto">
+        <div class="flex flex-wrap justify-between items-center -m-8">
+          <div class="w-auto p-8">
+            <a
+              class="max-w-max inline-flex items-center font-bold text-2xl text-gray-900 uppercase tracking-wider"
+              href="#"
+            >
+              <img class="h-8" src="Nexnc_files/logo.png" alt="" /><span
+                class="ml-2"
+                >Nexnc</span
+              >
+            </a>
+          </div>
+          <div class="w-auto p-8">
+            <ul class="flex flex-wrap items-center -m-5">
+              <li class="p-5">
+                <a
+                  class="text-gray-600 hover:text-gray-700 font-medium"
+                  href="#"
+                  >About</a
+                >
+              </li>
+              <li class="p-5">
+                <a
+                  class="text-gray-600 hover:text-gray-700 font-medium"
+                  href="#"
+                  >Careers</a
+                >
+              </li>
+              <li class="p-5">
+                <a
+                  class="text-gray-600 hover:text-gray-700 font-medium"
+                  href="#"
+                  >Press/News</a
+                >
+              </li>
+              <li class="p-5">
+                <a
+                  class="text-gray-600 hover:text-gray-700 font-medium"
+                  href="https://blog.nexnc.com/"
+                  >Blog</a
+                >
+              </li>
+              <li class="p-5">
+                <a
+                  class="text-gray-600 hover:text-gray-700 font-medium"
+                  href="#"
+                  >Contact Us</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="w-auto p-8">
+            <div class="flex flex-wrap -m-1.5">
+              <div class="w-auto p-1.5">
+                <a href="#">
+                  <div
+                    class="flex items-center justify-center w-8 h-8 border border-gray-300 hover:border-gray-400 rounded-full"
+                  >
+                    <svg
+                      width="8"
+                      height="14"
+                      viewBox="0 0 8 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5.55736 5.2L5.55736 3.88C5.55736 3.308 5.69631 3 6.66894 3H7.87315V0.800003L6.02052 0.800003C3.70473 0.800003 2.77841 2.252 2.77841 3.88V5.2H0.925781L0.925781 7.4H2.77841L2.77841 14H5.55736L5.55736 7.4H7.59526L7.87315 5.2H5.55736Z"
+                        fill="#27272A"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+              <div class="w-auto p-1.5">
+                <a href="#">
+                  <div
+                    class="flex items-center justify-center w-8 h-8 border border-gray-300 hover:border-gray-400 rounded-full"
+                  >
+                    <svg
+                      width="14"
+                      height="11"
+                      viewBox="0 0 14 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.6655 1.39641C13.1901 1.60149 12.6728 1.74907 12.1399 1.80656C12.6931 1.47788 13.1074 0.958619 13.3051 0.346204C12.7859 0.655036 12.2172 0.871595 11.6241 0.986274C11.3762 0.721276 11.0764 0.510168 10.7434 0.366102C10.4104 0.222036 10.0512 0.1481 9.68836 0.148902C8.22024 0.148902 7.03953 1.33893 7.03953 2.79928C7.03953 3.00436 7.06439 3.20943 7.10478 3.40673C4.90649 3.29177 2.94589 2.24155 1.64246 0.633614C1.40495 1.03927 1.2805 1.50117 1.28203 1.97123C1.28203 2.89094 1.74965 3.70191 2.46274 4.17885C2.0425 4.1623 1.63211 4.0468 1.26494 3.84173V3.87435C1.26494 5.16226 2.17533 6.22956 3.38866 6.47502C3.16084 6.5342 2.92649 6.56447 2.69111 6.56513C2.51866 6.56513 2.35554 6.54804 2.19086 6.52474C2.52643 7.57495 3.50362 8.33775 4.66724 8.3626C3.75685 9.07569 2.61654 9.49515 1.37835 9.49515C1.15619 9.49515 0.951119 9.48738 0.738281 9.46253C1.91278 10.216 3.30632 10.651 4.80706 10.651C9.67904 10.651 12.345 6.61484 12.345 3.11155C12.345 2.99659 12.345 2.88162 12.3372 2.76666C12.853 2.38914 13.3051 1.92152 13.6655 1.39641Z"
+                        fill="#27272A"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+              <div class="w-auto p-1.5">
+                <a href="#">
+                  <div
+                    class="flex items-center justify-center w-8 h-8 border border-gray-300 hover:border-gray-400 rounded-full"
+                  >
+                    <svg
+                      width="16"
+                      height="15"
+                      viewBox="0 0 16 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8.00094 0.360001C6.09046 0.360001 5.85022 0.368801 5.09958 0.402241C4.34894 0.437441 3.83766 0.555361 3.38974 0.729601C2.9199 0.906321 2.49433 1.18353 2.14278 1.54184C1.78468 1.89357 1.50751 2.31909 1.33054 2.7888C1.1563 3.23584 1.0375 3.748 1.00318 4.496C0.969738 5.2484 0.960937 5.48776 0.960937 7.40088C0.960937 9.31224 0.969738 9.5516 1.00318 10.3022C1.03838 11.052 1.1563 11.5633 1.33054 12.0112C1.51094 12.4741 1.75118 12.8666 2.14278 13.2582C2.5335 13.6498 2.92598 13.8909 3.38886 14.0704C3.83766 14.2446 4.34806 14.3634 5.09782 14.3978C5.84934 14.4312 6.0887 14.44 8.00094 14.44C9.91318 14.44 10.1517 14.4312 10.9032 14.3978C11.6521 14.3626 12.1651 14.2446 12.613 14.0704C13.0826 13.8936 13.5078 13.6164 13.8591 13.2582C14.2507 12.8666 14.4909 12.4741 14.6713 12.0112C14.8447 11.5633 14.9635 11.052 14.9987 10.3022C15.0321 9.5516 15.0409 9.31224 15.0409 7.4C15.0409 5.48776 15.0321 5.2484 14.9987 4.49688C14.9635 3.748 14.8447 3.23584 14.6713 2.7888C14.4944 2.31908 14.2172 1.89356 13.8591 1.54184C13.5077 1.1834 13.0821 0.906169 12.6121 0.729601C12.1633 0.555361 11.6512 0.436561 10.9023 0.402241C10.1508 0.368801 9.9123 0.360001 7.99918 0.360001H8.00182H8.00094ZM7.36998 1.62896H8.00182C9.8815 1.62896 10.1041 1.63512 10.846 1.66944C11.5324 1.70024 11.9055 1.81552 12.1537 1.91144C12.4819 2.03904 12.7169 2.19216 12.9633 2.43856C13.2097 2.68496 13.3619 2.91904 13.4895 3.24816C13.5863 3.49544 13.7007 3.86856 13.7315 4.55496C13.7658 5.2968 13.7729 5.51944 13.7729 7.39824C13.7729 9.27704 13.7658 9.50056 13.7315 10.2424C13.7007 10.9288 13.5854 11.301 13.4895 11.5492C13.3766 11.8549 13.1965 12.1313 12.9624 12.3579C12.716 12.6043 12.4819 12.7566 12.1528 12.8842C11.9064 12.981 11.5333 13.0954 10.846 13.127C10.1041 13.1605 9.8815 13.1684 8.00182 13.1684C6.12214 13.1684 5.89862 13.1605 5.15678 13.127C4.47038 13.0954 4.09814 12.981 3.84998 12.8842C3.54418 12.7715 3.26753 12.5916 3.04038 12.3579C2.80608 12.1309 2.62565 11.8543 2.51238 11.5483C2.41646 11.301 2.30118 10.9279 2.27038 10.2415C2.23694 9.49968 2.2299 9.27704 2.2299 7.39648C2.2299 5.5168 2.23694 5.29504 2.27038 4.5532C2.30206 3.8668 2.41646 3.49368 2.51326 3.24552C2.64086 2.91728 2.79398 2.68232 3.04038 2.43592C3.28678 2.18952 3.52086 2.03728 3.84998 1.90968C4.09814 1.81288 4.47038 1.69848 5.15678 1.6668C5.80622 1.63688 6.0579 1.62808 7.36998 1.6272V1.62896ZM11.7594 2.7976C11.6485 2.7976 11.5386 2.81945 11.4361 2.86191C11.3336 2.90436 11.2405 2.96659 11.1621 3.04504C11.0836 3.12348 11.0214 3.21661 10.9789 3.31911C10.9365 3.42161 10.9146 3.53146 10.9146 3.6424C10.9146 3.75334 10.9365 3.8632 10.9789 3.96569C11.0214 4.06819 11.0836 4.16132 11.1621 4.23976C11.2405 4.31821 11.3336 4.38044 11.4361 4.42289C11.5386 4.46535 11.6485 4.4872 11.7594 4.4872C11.9835 4.4872 12.1984 4.3982 12.3568 4.23976C12.5152 4.08133 12.6042 3.86646 12.6042 3.6424C12.6042 3.41835 12.5152 3.20347 12.3568 3.04504C12.1984 2.88661 11.9835 2.7976 11.7594 2.7976ZM8.00182 3.78496C7.52228 3.77748 7.04604 3.86547 6.60084 4.0438C6.15563 4.22214 5.75035 4.48726 5.40859 4.82373C5.06683 5.1602 4.79542 5.5613 4.61016 6.00367C4.4249 6.44604 4.32949 6.92084 4.32949 7.40044C4.32949 7.88004 4.4249 8.35484 4.61016 8.79721C4.79542 9.23958 5.06683 9.64068 5.40859 9.97715C5.75035 10.3136 6.15563 10.5787 6.60084 10.7571C7.04604 10.9354 7.52228 11.0234 8.00182 11.0159C8.95093 11.0011 9.85616 10.6137 10.5221 9.93726C11.1881 9.26084 11.5613 8.34967 11.5613 7.40044C11.5613 6.45121 11.1881 5.54004 10.5221 4.86362C9.85616 4.1872 8.95093 3.79977 8.00182 3.78496ZM8.00182 5.05304C8.62427 5.05304 9.22123 5.30031 9.66137 5.74045C10.1015 6.18059 10.3488 6.77755 10.3488 7.4C10.3488 8.02245 10.1015 8.61941 9.66137 9.05955C9.22123 9.49969 8.62427 9.74696 8.00182 9.74696C7.37937 9.74696 6.78241 9.49969 6.34227 9.05955C5.90213 8.61941 5.65486 8.02245 5.65486 7.4C5.65486 6.77755 5.90213 6.18059 6.34227 5.74045C6.78241 5.30031 7.37937 5.05304 8.00182 5.05304Z"
+                        fill="#27272A"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Code injected by live-server -->
+    <script>
+      // <![CDATA[  <-- For SVG support
+      if ("WebSocket" in window) {
+        (function () {
+          function refreshCSS() {
+            var sheets = [].slice.call(document.getElementsByTagName("link"));
+            var head = document.getElementsByTagName("head")[0];
+            for (var i = 0; i < sheets.length; ++i) {
+              var elem = sheets[i];
+              var parent = elem.parentElement || head;
+              parent.removeChild(elem);
+              var rel = elem.rel;
+              if (
+                (elem.href && typeof rel != "string") ||
+                rel.length == 0 ||
+                rel.toLowerCase() == "stylesheet"
+              ) {
+                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, "");
+                elem.href =
+                  url +
+                  (url.indexOf("?") >= 0 ? "&" : "?") +
+                  "_cacheOverride=" +
+                  new Date().valueOf();
+              }
+              parent.appendChild(elem);
+            }
+          }
+          var protocol =
+            window.location.protocol === "http:" ? "ws://" : "wss://";
+          var address =
+            protocol + window.location.host + window.location.pathname + "/ws";
+          var socket = new WebSocket(address);
+          socket.onmessage = function (msg) {
+            if (msg.data == "reload") window.location.reload();
+            else if (msg.data == "refreshcss") refreshCSS();
+          };
+          if (
+            sessionStorage &&
+            !sessionStorage.getItem("IsThisFirstTime_Log_From_LiveServer")
+          ) {
+            console.log("Live reload enabled.");
+            sessionStorage.setItem("IsThisFirstTime_Log_From_LiveServer", true);
+          }
+        })();
+      } else {
+        console.error(
+          "Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading."
+        );
+      }
+      // ]]>
+    </script>
+  </body>
 </html>
