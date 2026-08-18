@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>git log --journey</title>
+<style>
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/JetBrains-Mono/2.304/index.min.css');
+
+  :root {
+    --bg: #0b0e14;
+    --bg-raised: #12161f;
+    --line: #232a38;
+    --text: #e6e1d3;
+    --text-dim: #7b8496;
+    --text-faint: #4a5265;
+    --accent: #7fb069;
+    --accent-dim: #4d6b3f;
+    --add: #7fb069;
+    --del: #c9756a;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    line-height: 1.6;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  /* ambient scanline texture, very subtle */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 24px 100px;
+    position: relative;
+    z-index: 2;
+  }
+
+  header {
+    margin-bottom: 56px;
+  }
+
+  .prompt {
+    color: var(--accent);
+    font-size: 13px;
+    margin-bottom: 10px;
+    opacity: 0.85;
+  }
+
+  .prompt .cursor {
+    display: inline-block;
+    width: 7px;
+    height: 13px;
+    background: var(--accent);
+    margin-left: 4px;
+    animation: blink 1.1s step-end infinite;
+    vertical-align: -2px;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  h1 span { color: var(--text-faint); font-weight: 400; }
+
+  .subhead {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-top: 12px;
+    max-width: 480px;
+  }
+
+  .rule {
+    border: none;
+    border-top: 1px dashed var(--line);
+    margin: 40px 0;
+  }
+
+  /* the git log */
+  .log {
+    position: relative;
+  }
+
+  .log::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 14px;
+    bottom: 14px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--line), var(--line) 92%, transparent);
+  }
+
+  .entry {
+    position: relative;
+    padding-left: 48px;
+    margin-bottom: 44px;
+  }
+
+  .entry:last-child { margin-bottom: 0; }
+
+  .node {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .entry.active .node {
+    border-color: var(--accent-dim);
+    box-shadow: 0 0 0 3px rgba(127,176,105,0.08);
+  }
+
+  .entry-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-bottom: 4px;
+  }
+
+  .platform-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .branch-tag {
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(127,176,105,0.08);
+    border: 1px solid var(--accent-dim);
+    border-radius: 3px;
+    padding: 2px 7px;
+    letter-spacing: 0.3px;
+  }
+
+  .meta-line {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-bottom: 14px;
+  }
+
+  .hash { color: var(--text-dim); }
+
+  .stat-block {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    color: var(--text-dim);
+  }
+
+  .stat-row .v {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .stat-row .v.add::before { content: '+'; color: var(--add); margin-right: 2px; }
+
+  .stat-block.loading .v { color: var(--text-faint); }
+  .stat-block.error { color: var(--del); font-size: 12px; }
+
+  .checkout {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  .checkout a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-dim);
+  }
+
+  .checkout a:hover { border-bottom-color: var(--accent); }
+
+  .checkout .cmd { color: var(--text-faint); margin-right: 8px; }
+
+  .pending-note {
+    font-size: 12px;
+    color: var(--text-faint);
+    font-style: italic;
+  }
+
+  footer {
+    margin-top: 60px;
+    font-size: 12px;
+    color: var(--text-faint);
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prompt .cursor { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="prompt">visitor@nexnc:~$ git log --graph --all<span class="cursor"></span></div>
+    <h1>my git journey<span>.log</span></h1>
+    <p class="subhead">A running history of where my code lives — from first commits to self-hosted infrastructure. Stats pulled live from each platform's API.</p>
+  </header>
+
+  <hr class="rule">
+
+  <div class="log" id="log">
+
+    <!-- GitHub -->
+    <div class="entry active" data-platform="github" data-user="yourusername">
+      <div class="node">◆</div>
+      <div class="entry-head">
+        <span class="platform-name">GitHub</span>
+        <span class="branch-tag">origin/main</span>
+      </div>
+      <div class="meta-line"><span class="hash">commit 1a2b3c4</span> — where it started</div>
+      <div class="stat-block loading">
+        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">…</span></div>
+        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">…</span></div>
+        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
+        <div class="stat-row"><span>commits</span><span class="v" data-field="commits">…</span></div>
+        <div class="stat-row"><span>issues opened</span><span class="v" data-field="issues">…</span></div>
+        <div class="stat-row"><span>PRs opened</span><span class="v" data-field="prs">…</span></div>
+        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">…</span></div>
+      </div>
+      <img class="contrib-graph" data-graph-for="yourusername" alt="GitHub contribution graph" style="width:100%; margin-top:10px; border:1px solid var(--line); border-radius:4px; display:none;">
+      <div class="checkout"><span class="cmd">→</span><a href="https://github.com/nexnc" target="_blank" rel="noopener">github.com/nexnc</a></div>
+    </div>
+
+    <!-- GitLab -->
+    <div class="entry" data-platform="gitlab" data-user="yourusername">
+      <div class="node">◆</div>
+      <div class="entry-head">
+        <span class="platform-name">GitLab</span>
+        <span class="branch-tag">origin/main</span>
+      </div>
+      <div class="meta-line"><span class="hash">commit 5d6e7f8</span> — CI/CD & private projects</div>
+      <div class="stat-block loading">
+        <div class="stat-row"><span>public projects</span><span class="v" data-field="repos">…</span></div>
+        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
+        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">…</span></div>
+      </div>
+      <div class="checkout"><span class="cmd">→</span><a href="https://gitlab.com/nexnc" target="_blank" rel="noopener">gitlab.com/nexnc</a></div>
+    </div>
+
+    <!-- Codeberg -->
+    <div class="entry" data-platform="codeberg" data-user="yourusername">
+      <div class="node">◆</div>
+      <div class="entry-head">
+        <span class="platform-name">Codeberg</span>
+        <span class="branch-tag">origin/main</span>
+      </div>
+      <div class="meta-line"><span class="hash">commit 9a0b1c2</span> — going FOSS-native</div>
+      <div class="stat-block loading">
+        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">…</span></div>
+        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">…</span></div>
+        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
+        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">…</span></div>
+      </div>
+      <div class="checkout"><span class="cmd">→</span><a href="https://codeberg.org/nexnc" target="_blank" rel="noopener">codeberg.org/nexnc</a></div>
+    </div>
+
+    <!-- Forgejo (self-hosted, future) -->
+    <div class="entry" data-platform="forgejo" data-user="yourusername" data-instance="https://git.nexnc.com">
+      <div class="node">◇</div>
+      <div class="entry-head">
+        <span class="platform-name">Forgejo <span style="color:var(--text-faint); font-weight:400;">@ git.nexnc.com</span></span>
+        <span class="branch-tag" style="color:var(--text-faint); border-color:var(--line); background:transparent;">unreleased</span>
+      </div>
+      <div class="meta-line"><span class="hash">commit HEAD</span> — self-hosted, self-owned</div>
+      <div class="stat-block loading">
+        <div class="stat-row"><span>status</span><span class="v" data-field="status">checking…</span></div>
+        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">…</span></div>
+        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">…</span></div>
+        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
+      </div>
+      <p class="pending-note" data-field="cache-note" style="margin-top:6px;"></p>
+      <div class="checkout"><span class="cmd">→</span><a href="https://git.nexnc.com" target="_blank" rel="noopener">git.nexnc.com</a></div>
+    </div>
+
+  </div>
+
+  <hr class="rule">
+
+  <footer>
+    nexnc.com/git — last synced <span id="sync-time"></span>
+  </footer>
+
+</div>
+
+<script>
+document.getElementById('sync-time').textContent = new Date().toLocaleString();
+
+async function loadGitHub(entry, user) {
+  const res = await fetch(`https://api.github.com/users/${user}`);
+  if (!res.ok) throw new Error('user not found');
+  const d = await res.json();
+  set(entry, 'repos', d.public_repos);
+  set(entry, 'followers', d.followers);
+  set(entry, 'joined', new Date(d.created_at).getFullYear());
+
+  // sum stars across public repos (paginated, capped at 300 repos / 3 pages to be rate-limit friendly)
+  let stars = 0;
+  for (let page = 1; page <= 3; page++) {
+    const r = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&page=${page}`);
+    if (!r.ok) break;
+    const repos = await r.json();
+    if (!repos.length) break;
+    stars += repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
+    if (repos.length < 100) break;
+  }
+  set(entry, 'stars', stars);
+
+  // total commits authored (public, indexed repos only)
+  fetch(`https://api.github.com/search/commits?q=author:${user}`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => d && set(entry, 'commits', d.total_count))
+    .catch(() => set(entry, 'commits', '—'));
+
+  // issues & PRs opened
+  fetch(`https://api.github.com/search/issues?q=author:${user}+type:issue`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => d && set(entry, 'issues', d.total_count))
+    .catch(() => set(entry, 'issues', '—'));
+
+  fetch(`https://api.github.com/search/issues?q=author:${user}+type:pr`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => d && set(entry, 'prs', d.total_count))
+    .catch(() => set(entry, 'prs', '—'));
+
+  // contribution graph (image, sidesteps CORS entirely)
+  const img = entry.querySelector('.contrib-graph');
+  if (img) {
+    img.src = `https://ghchart.rshah.org/7fb069/${user}`;
+    img.style.display = 'block';
+  }
+}
+
+async function loadGitLab(entry, user) {
+  const userRes = await fetch(`https://gitlab.com/api/v4/users?username=${user}`);
+  const users = await userRes.json();
+  if (!users.length) throw new Error('user not found');
+  const u = users[0];
+  const projRes = await fetch(`https://gitlab.com/api/v4/users/${u.id}/projects?visibility=public&per_page=100`);
+  const projects = await projRes.json();
+  const list = Array.isArray(projects) ? projects : [];
+  set(entry, 'repos', list.length);
+  set(entry, 'stars', list.reduce((sum, p) => sum + (p.star_count || 0), 0));
+  set(entry, 'joined', new Date(u.created_at).getFullYear());
+}
+
+// Codeberg & Forgejo both run Gitea/Forgejo software -> same API shape
+async function loadGitea(entry, user, base) {
+  const res = await fetch(`${base}/api/v1/users/${user}`);
+  if (!res.ok) throw new Error('user not found');
+  const d = await res.json();
+  set(entry, 'repos', d.public_repos ?? '—');
+  set(entry, 'followers', d.followers_count ?? '—');
+  set(entry, 'joined', d.created ? new Date(d.created).getFullYear() : '—');
+
+  const reposRes = await fetch(`${base}/api/v1/users/${user}/repos?limit=50`);
+  if (reposRes.ok) {
+    const repos = await reposRes.json();
+    const stars = Array.isArray(repos) ? repos.reduce((sum, r) => sum + (r.stars_count || 0), 0) : '—';
+    set(entry, 'stars', stars);
+  }
+}
+
+// Forgejo home instance: only reachable while your PC is on.
+// Falls back to last-known cached stats from localStorage when offline.
+async function loadForgejoWithCache(entry, user, base) {
+  const cacheKey = `forgejo-stats-${user}`;
+  try {
+    const res = await fetch(`${base}/api/v1/users/${user}`, { signal: AbortSignal.timeout(4000) });
+    if (!res.ok) throw new Error('unreachable');
+    const d = await res.json();
+
+    let stars = 0;
+    const reposRes = await fetch(`${base}/api/v1/users/${user}/repos?limit=50`);
+    if (reposRes.ok) {
+      const repos = await reposRes.json();
+      stars = Array.isArray(repos) ? repos.reduce((sum, r) => sum + (r.stars_count || 0), 0) : 0;
+    }
+
+    const snapshot = {
+      repos: d.public_repos ?? '—',
+      followers: d.followers_count ?? '—',
+      stars,
+      syncedAt: new Date().toISOString(),
+    };
+    localStorage.setItem(cacheKey, JSON.stringify(snapshot));
+
+    set(entry, 'status', '● online');
+    entry.querySelector('[data-field="status"]').style.color = 'var(--accent)';
+    set(entry, 'repos', snapshot.repos);
+    set(entry, 'followers', snapshot.followers);
+    set(entry, 'stars', snapshot.stars);
+  } catch (e) {
+    const cached = localStorage.getItem(cacheKey);
+    set(entry, 'status', '○ offline');
+    entry.querySelector('[data-field="status"]').style.color = 'var(--text-faint)';
+    if (cached) {
+      const s = JSON.parse(cached);
+      set(entry, 'repos', s.repos);
+      set(entry, 'followers', s.followers);
+      set(entry, 'stars', s.stars);
+      const note = entry.querySelector('[data-field="cache-note"]');
+      if (note) note.textContent = `showing cached stats from ${new Date(s.syncedAt).toLocaleString()} — PC is off right now`;
+    } else {
+      const note = entry.querySelector('[data-field="cache-note"]');
+      if (note) note.textContent = 'no cached stats yet — turn on the instance once to sync';
+    }
+  }
+}
+
+function set(entry, field, value) {
+  const el = entry.querySelector(`[data-field="${field}"]`);
+  if (el) {
+    el.textContent = value;
+    el.classList.add('add');
+  }
+}
+
+function fail(entry) {
+  const block = entry.querySelector('.stat-block');
+  if (block) {
+    block.classList.remove('loading');
+    block.classList.add('error');
+    block.innerHTML = '<p>couldn\'t fetch stats — check username / CORS</p>';
+  }
+}
+
+function done(entry) {
+  const block = entry.querySelector('.stat-block');
+  if (block) block.classList.remove('loading');
+}
+
+document.querySelectorAll('.entry[data-platform]').forEach(entry => {
+  const platform = entry.dataset.platform;
+  const user = entry.dataset.user;
+  if (!user || user === 'yourusername') return; // skip placeholders, incl. forgejo until configured
+
+  const handlers = {
+    github: () => loadGitHub(entry, user),
+    gitlab: () => loadGitLab(entry, user),
+    codeberg: () => loadGitea(entry, user, 'https://codeberg.org'),
+    forgejo: () => loadForgejoWithCache(entry, user, entry.dataset.instance),
+  };
+
+  const run = handlers[platform];
+  if (!run) return;
+
+  run().then(() => done(entry)).catch(() => fail(entry));
+});
+</script>
+</body>
+</html>
