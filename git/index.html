@@ -1,325 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+function nexncGet(){var m=document.cookie.match(/(?:^|; )nexnc-theme=(light|dark)/);if(m)return m[1];try{return localStorage.getItem('nexnc-theme')}catch(e){return null}}
+function nexncSet(t){try{localStorage.setItem('nexnc-theme',t)}catch(e){}document.cookie='nexnc-theme='+t+'; domain=.nexnc.com; path=/; max-age=31536000; SameSite=Lax'}
+if(nexncGet()==='light')document.documentElement.setAttribute('data-theme','light');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>git log --journey</title>
+<meta name="description" content="Where nexnc's code lives: GitHub, GitLab, Codeberg and a self-hosted Forgejo, with live stats.">
 <style>
-  @import url('https://cdnjs.cloudflare.com/ajax/libs/JetBrains-Mono/2.304/index.min.css');
+  @view-transition { navigation: auto; }
 
   :root {
-    --bg: #0b0e14;
-    --bg-raised: #12161f;
-    --line: #232a38;
-    --text: #e6e1d3;
-    --text-dim: #7b8496;
-    --text-faint: #4a5265;
-    --accent: #7fb069;
-    --accent-dim: #4d6b3f;
-    --add: #7fb069;
-    --del: #c9756a;
-    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --bg: #141b1a; --bg-raised: #1a2321; --line: #2b3836;
+    --text: #e6ece9; --text-dim: #8fa09b; --text-faint: #60726d;
+    --accent: #5fd0c4; --accent-dim: #2d6b64; --add: #5fd0c4; --del: #e08a80; --glow: rgba(95,208,196,.1);
+    --p0: #5fd0c4; --p1: #e6c86e; --p2: #e58fb0; --p3: #8fb4ff;
+    --scan: rgba(255,255,255,0.012);
+    --mono: ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --bg: #f3f5f4; --bg-raised: #ffffff; --line: #cfd8d5;
+    --text: #17211f; --text-dim: #5d6b68; --text-faint: #7f8c89;
+    --accent: #0b6e6e; --accent-dim: #8cc3c3; --add: #0b6e6e; --del: #b0453a; --glow: rgba(11,110,110,.08);
+    --p0: #0b6e6e; --p1: #8a6a00; --p2: #a02c63; --p3: #2a55b8;
+    --scan: rgba(0,0,0,0.015);
+    color-scheme: light;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--mono);
-    line-height: 1.6;
-    padding: 0;
-    min-height: 100vh;
+    background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; min-height: 100vh;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    transition: background-color .25s, color .25s;
   }
-
-  /* ambient scanline texture, very subtle */
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.012) 0px,
-      rgba(255,255,255,0.012) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    pointer-events: none;
-    z-index: 1;
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background: repeating-linear-gradient(to bottom, var(--scan) 0, var(--scan) 1px, transparent 1px, transparent 3px);
   }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 24px 100px; position: relative; z-index: 2; }
 
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 64px 24px 100px;
-    position: relative;
-    z-index: 2;
+  .back {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 36px;
+    padding: 6px 14px; border: 1px solid var(--line); border-radius: 4px;
+    color: var(--text-dim); text-decoration: none; font-size: 13px; transition: color .15s, border-color .15s;
   }
+  .back:hover { color: var(--accent); border-color: var(--accent-dim); }
 
-  header {
-    margin-bottom: 56px;
+  .theme-toggle {
+    display: none; position: fixed; top: calc(1.25rem + env(safe-area-inset-top, 0px)); right: 1.25rem; z-index: 100;
+    align-items: center; justify-content: center; background: var(--bg); border: 1px solid var(--line);
+    color: var(--text-dim); padding: .45rem; border-radius: 50%; cursor: pointer; transition: all .2s;
   }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: scale(1.05); }
+  .theme-toggle svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  :root[data-theme="dark"] .moon, :root[data-theme="light"] .sun { display: none; }
+  html.js .theme-toggle { display: flex; }
 
-  .prompt {
-    color: var(--accent);
-    font-size: 13px;
-    margin-bottom: 10px;
-    opacity: 0.85;
-  }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
-  .prompt .cursor {
-    display: inline-block;
-    width: 7px;
-    height: 13px;
-    background: var(--accent);
-    margin-left: 4px;
-    animation: blink 1.1s step-end infinite;
-    vertical-align: -2px;
-  }
-
+  header { margin-bottom: 56px; }
+  .prompt { color: var(--accent); font-size: 13px; margin-bottom: 10px; opacity: .85; }
+  .prompt .cursor { display: inline-block; width: 7px; height: 13px; background: var(--accent); margin-left: 4px; animation: blink 1.1s step-end infinite; vertical-align: -2px; }
   @keyframes blink { 50% { opacity: 0; } }
-
-  h1 {
-    font-size: clamp(28px, 5vw, 40px);
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: var(--text);
-  }
-
+  h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 700; letter-spacing: -.5px; }
   h1 span { color: var(--text-faint); font-weight: 400; }
+  .subhead { color: var(--text-dim); font-size: 14px; margin-top: 12px; max-width: 480px; }
+  .rule { border: none; border-top: 1px dashed var(--line); margin: 40px 0; }
 
-  .subhead {
-    color: var(--text-dim);
-    font-size: 14px;
-    margin-top: 12px;
-    max-width: 480px;
-  }
-
-  .rule {
-    border: none;
-    border-top: 1px dashed var(--line);
-    margin: 40px 0;
-  }
-
-  /* the git log */
-  .log {
-    position: relative;
-  }
-
-  .log::before {
-    content: '';
-    position: absolute;
-    left: 15px;
-    top: 14px;
-    bottom: 14px;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--line), var(--line) 92%, transparent);
-  }
-
-  .entry {
-    position: relative;
-    padding-left: 48px;
-    margin-bottom: 44px;
-  }
-
+  .log { position: relative; }
+  .log::before { content: ''; position: absolute; left: 15px; top: 14px; bottom: 14px; width: 1px;
+    background: linear-gradient(to bottom, var(--line), var(--line) 92%, transparent); }
+  .entry { position: relative; padding-left: 48px; margin-bottom: 44px; }
   .entry:last-child { margin-bottom: 0; }
-
-  .node {
-    position: absolute;
-    left: 0;
-    top: 4px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--bg-raised);
-    border: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-  }
-
-  .entry.active .node {
-    border-color: var(--accent-dim);
-    box-shadow: 0 0 0 3px rgba(127,176,105,0.08);
-  }
-
-  .entry-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-    margin-bottom: 4px;
-  }
-
-  .platform-name {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .branch-tag {
-    font-size: 11px;
-    color: var(--accent);
-    background: rgba(127,176,105,0.08);
-    border: 1px solid var(--accent-dim);
-    border-radius: 3px;
-    padding: 2px 7px;
-    letter-spacing: 0.3px;
-  }
-
-  .meta-line {
-    font-size: 12px;
-    color: var(--text-faint);
-    margin-bottom: 14px;
-  }
-
+  .node { position: absolute; left: 0; top: 4px; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--bg-raised); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .entry.active .node { border-color: var(--accent-dim); box-shadow: 0 0 0 3px var(--glow); }
+  .entry-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 4px; }
+  .platform-name { font-size: 18px; font-weight: 700; }
+  .branch-tag { font-size: 11px; color: var(--accent); background: var(--glow); border: 1px solid var(--accent-dim); border-radius: 3px; padding: 2px 7px; letter-spacing: .3px; }
+  .branch-tag.muted { color: var(--text-faint); border-color: var(--line); background: transparent; }
+  .meta-line { font-size: 12px; color: var(--text-faint); margin-bottom: 14px; }
   .hash { color: var(--text-dim); }
-
-  .stat-block {
-    background: var(--bg-raised);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 14px 16px;
-    font-size: 13px;
-  }
-
-  .stat-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 3px 0;
-    color: var(--text-dim);
-  }
-
-  .stat-row .v {
-    color: var(--text);
-    font-weight: 700;
-  }
-
+  .stat-block { background: var(--bg-raised); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; font-size: 13px; }
+  .stat-row { display: flex; justify-content: space-between; padding: 3px 0; color: var(--text-dim); }
+  .stat-row .v { color: var(--text); font-weight: 700; }
   .stat-row .v.add::before { content: '+'; color: var(--add); margin-right: 2px; }
-
   .stat-block.loading .v { color: var(--text-faint); }
   .stat-block.error { color: var(--del); font-size: 12px; }
-
-  .checkout {
-    margin-top: 12px;
-    font-size: 13px;
-  }
-
-  .checkout a {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid var(--accent-dim);
-  }
-
+  .contrib-graph { width: 100%; margin-top: 10px; border: 1px solid var(--line); border-radius: 4px; display: none; }
+  .checkout { margin-top: 12px; font-size: 13px; }
+  .checkout a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); }
   .checkout a:hover { border-bottom-color: var(--accent); }
-
   .checkout .cmd { color: var(--text-faint); margin-right: 8px; }
+  .pending-note { font-size: 12px; color: var(--text-faint); font-style: italic; margin-top: 6px; }
 
-  .pending-note {
-    font-size: 12px;
-    color: var(--text-faint);
-    font-style: italic;
-  }
+  footer { margin-top: 60px; font-size: 12px; color: var(--text-faint); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 16px; }
 
-  footer {
-    margin-top: 60px;
-    font-size: 12px;
-    color: var(--text-faint);
-    text-align: center;
-  }
+  /* rev code: type the hex digits in data-hex. Colors go by place from the right. */
+  .rev::before { content: "rev: 0x"; color: var(--text-faint); }
+  .rev::after { content: attr(data-hex);
+    background: repeating-linear-gradient(to left, var(--p0) 0 1ch, var(--p1) 1ch 2ch, var(--p2) 2ch 3ch, var(--p3) 3ch 4ch);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .prompt .cursor { animation: none; }
-  }
+  .prompt, .hash, .meta-line, .branch-tag, .stat-block, .checkout, .pending-note, footer, .back { font-family: var(--mono); }
+
+  @media (prefers-reduced-motion: reduce) { .prompt .cursor { animation: none; } }
 </style>
 </head>
 <body>
+<button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+  <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
 <div class="wrap">
+  <a href="/" class="back" aria-label="Back to nexnc.com home">&larr; Home</a>
 
   <header>
     <div class="prompt">visitor@nexnc:~$ git log --graph --all<span class="cursor"></span></div>
     <h1>my git journey<span>.log</span></h1>
-    <p class="subhead">A running history of where my code lives — from first commits to self-hosted infrastructure. Stats pulled live from each platform's API.</p>
+    <p class="subhead">GitHub is home. GitLab and Codeberg mirror it, so the commit hash is the same everywhere. Live stats are coming soon.</p>
   </header>
 
   <hr class="rule">
 
   <div class="log" id="log">
 
-    <!-- GitHub -->
-    <div class="entry active" data-platform="github" data-user="yourusername">
+    <div class="entry active" data-platform="github" data-user="nexnc">
       <div class="node">◆</div>
-      <div class="entry-head">
-        <span class="platform-name">GitHub</span>
-        <span class="branch-tag">origin/main</span>
+      <div class="entry-head"><span class="platform-name">GitHub</span><span class="branch-tag">origin/main</span></div>
+      <div class="meta-line"><span class="hash">commit 1a2b3c4</span> — primary, where it all starts</div>
+      <div class="stat-block">
+        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">—</span></div>
+        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">—</span></div>
+        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">—</span></div>
+        <div class="stat-row"><span>commits</span><span class="v" data-field="commits">—</span></div>
+        <div class="stat-row"><span>issues opened</span><span class="v" data-field="issues">—</span></div>
+        <div class="stat-row"><span>PRs opened</span><span class="v" data-field="prs">—</span></div>
+        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">—</span></div>
       </div>
-      <div class="meta-line"><span class="hash">commit 1a2b3c4</span> — where it started</div>
-      <div class="stat-block loading">
-        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">…</span></div>
-        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">…</span></div>
-        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
-        <div class="stat-row"><span>commits</span><span class="v" data-field="commits">…</span></div>
-        <div class="stat-row"><span>issues opened</span><span class="v" data-field="issues">…</span></div>
-        <div class="stat-row"><span>PRs opened</span><span class="v" data-field="prs">…</span></div>
-        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">…</span></div>
-      </div>
-      <img class="contrib-graph" data-graph-for="yourusername" alt="GitHub contribution graph" style="width:100%; margin-top:10px; border:1px solid var(--line); border-radius:4px; display:none;">
       <div class="checkout"><span class="cmd">→</span><a href="https://github.com/nexnc" target="_blank" rel="noopener">github.com/nexnc</a></div>
     </div>
 
-    <!-- GitLab -->
-    <div class="entry" data-platform="gitlab" data-user="yourusername">
+    <div class="entry" data-platform="gitlab" data-user="nexnc">
       <div class="node">◆</div>
-      <div class="entry-head">
-        <span class="platform-name">GitLab</span>
-        <span class="branch-tag">origin/main</span>
-      </div>
-      <div class="meta-line"><span class="hash">commit 5d6e7f8</span> — CI/CD & private projects</div>
-      <div class="stat-block loading">
-        <div class="stat-row"><span>public projects</span><span class="v" data-field="repos">…</span></div>
-        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
-        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">…</span></div>
+      <div class="entry-head"><span class="platform-name">GitLab</span><span class="branch-tag muted">mirror/main</span></div>
+      <div class="meta-line"><span class="hash">commit 1a2b3c4</span> — mirror of GitHub</div>
+      <div class="stat-block">
+        <div class="stat-row"><span>public projects</span><span class="v" data-field="repos">—</span></div>
+        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">—</span></div>
+        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">—</span></div>
       </div>
       <div class="checkout"><span class="cmd">→</span><a href="https://gitlab.com/nexnc" target="_blank" rel="noopener">gitlab.com/nexnc</a></div>
     </div>
 
-    <!-- Codeberg -->
-    <div class="entry" data-platform="codeberg" data-user="yourusername">
+    <div class="entry" data-platform="codeberg" data-user="nexnc">
       <div class="node">◆</div>
-      <div class="entry-head">
-        <span class="platform-name">Codeberg</span>
-        <span class="branch-tag">origin/main</span>
-      </div>
-      <div class="meta-line"><span class="hash">commit 9a0b1c2</span> — going FOSS-native</div>
-      <div class="stat-block loading">
-        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">…</span></div>
-        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">…</span></div>
-        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
-        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">…</span></div>
+      <div class="entry-head"><span class="platform-name">Codeberg</span><span class="branch-tag muted">mirror/main</span></div>
+      <div class="meta-line"><span class="hash">commit 1a2b3c4</span> — mirror of GitHub</div>
+      <div class="stat-block">
+        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">—</span></div>
+        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">—</span></div>
+        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">—</span></div>
+        <div class="stat-row"><span>joined</span><span class="v" data-field="joined">—</span></div>
       </div>
       <div class="checkout"><span class="cmd">→</span><a href="https://codeberg.org/nexnc" target="_blank" rel="noopener">codeberg.org/nexnc</a></div>
     </div>
 
-    <!-- Forgejo (self-hosted, future) -->
-    <div class="entry" data-platform="forgejo" data-user="yourusername" data-instance="https://git.nexnc.com">
+    <!-- Forgejo: not deployed yet. When live, add data-user="<username>" to this div to switch on live stats,
+         then replace the placeholder block below with the stat-block used by the other entries. -->
+    <div class="entry" data-platform="forgejo" data-instance="https://git.nexnc.com">
       <div class="node">◇</div>
       <div class="entry-head">
         <span class="platform-name">Forgejo <span style="color:var(--text-faint); font-weight:400;">@ git.nexnc.com</span></span>
-        <span class="branch-tag" style="color:var(--text-faint); border-color:var(--line); background:transparent;">unreleased</span>
+        <span class="branch-tag muted">coming soon</span>
       </div>
       <div class="meta-line"><span class="hash">commit HEAD</span> — self-hosted, self-owned</div>
-      <div class="stat-block loading">
-        <div class="stat-row"><span>status</span><span class="v" data-field="status">checking…</span></div>
-        <div class="stat-row"><span>repos</span><span class="v" data-field="repos">…</span></div>
-        <div class="stat-row"><span>followers</span><span class="v" data-field="followers">…</span></div>
-        <div class="stat-row"><span>stars earned</span><span class="v" data-field="stars">…</span></div>
+      <div class="stat-block">
+        <div class="stat-row"><span>status</span><span class="v">not live yet</span></div>
       </div>
-      <p class="pending-note" data-field="cache-note" style="margin-top:6px;"></p>
-      <div class="checkout"><span class="cmd">→</span><a href="https://git.nexnc.com" target="_blank" rel="noopener">git.nexnc.com</a></div>
+      <p class="pending-note">The home for my own repos is still being built.</p>
     </div>
 
   </div>
@@ -327,174 +192,17 @@
   <hr class="rule">
 
   <footer>
-    nexnc.com/git — last synced <span id="sync-time"></span>
+    <span>nexnc.com/git · GitHub is primary, GitLab and Codeberg are mirrors</span>
+    <span class="rev" data-hex="4B"></span>
   </footer>
-
 </div>
 
 <script>
-document.getElementById('sync-time').textContent = new Date().toLocaleString();
-
-async function loadGitHub(entry, user) {
-  const res = await fetch(`https://api.github.com/users/${user}`);
-  if (!res.ok) throw new Error('user not found');
-  const d = await res.json();
-  set(entry, 'repos', d.public_repos);
-  set(entry, 'followers', d.followers);
-  set(entry, 'joined', new Date(d.created_at).getFullYear());
-
-  // sum stars across public repos (paginated, capped at 300 repos / 3 pages to be rate-limit friendly)
-  let stars = 0;
-  for (let page = 1; page <= 3; page++) {
-    const r = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&page=${page}`);
-    if (!r.ok) break;
-    const repos = await r.json();
-    if (!repos.length) break;
-    stars += repos.reduce((sum, repo) => sum + (repo.stargazers_count || 0), 0);
-    if (repos.length < 100) break;
-  }
-  set(entry, 'stars', stars);
-
-  // total commits authored (public, indexed repos only)
-  fetch(`https://api.github.com/search/commits?q=author:${user}`)
-    .then(r => r.ok ? r.json() : null)
-    .then(d => d && set(entry, 'commits', d.total_count))
-    .catch(() => set(entry, 'commits', '—'));
-
-  // issues & PRs opened
-  fetch(`https://api.github.com/search/issues?q=author:${user}+type:issue`)
-    .then(r => r.ok ? r.json() : null)
-    .then(d => d && set(entry, 'issues', d.total_count))
-    .catch(() => set(entry, 'issues', '—'));
-
-  fetch(`https://api.github.com/search/issues?q=author:${user}+type:pr`)
-    .then(r => r.ok ? r.json() : null)
-    .then(d => d && set(entry, 'prs', d.total_count))
-    .catch(() => set(entry, 'prs', '—'));
-
-  // contribution graph (image, sidesteps CORS entirely)
-  const img = entry.querySelector('.contrib-graph');
-  if (img) {
-    img.src = `https://ghchart.rshah.org/7fb069/${user}`;
-    img.style.display = 'block';
-  }
-}
-
-async function loadGitLab(entry, user) {
-  const userRes = await fetch(`https://gitlab.com/api/v4/users?username=${user}`);
-  const users = await userRes.json();
-  if (!users.length) throw new Error('user not found');
-  const u = users[0];
-  const projRes = await fetch(`https://gitlab.com/api/v4/users/${u.id}/projects?visibility=public&per_page=100`);
-  const projects = await projRes.json();
-  const list = Array.isArray(projects) ? projects : [];
-  set(entry, 'repos', list.length);
-  set(entry, 'stars', list.reduce((sum, p) => sum + (p.star_count || 0), 0));
-  set(entry, 'joined', new Date(u.created_at).getFullYear());
-}
-
-// Codeberg & Forgejo both run Gitea/Forgejo software -> same API shape
-async function loadGitea(entry, user, base) {
-  const res = await fetch(`${base}/api/v1/users/${user}`);
-  if (!res.ok) throw new Error('user not found');
-  const d = await res.json();
-  set(entry, 'repos', d.public_repos ?? '—');
-  set(entry, 'followers', d.followers_count ?? '—');
-  set(entry, 'joined', d.created ? new Date(d.created).getFullYear() : '—');
-
-  const reposRes = await fetch(`${base}/api/v1/users/${user}/repos?limit=50`);
-  if (reposRes.ok) {
-    const repos = await reposRes.json();
-    const stars = Array.isArray(repos) ? repos.reduce((sum, r) => sum + (r.stars_count || 0), 0) : '—';
-    set(entry, 'stars', stars);
-  }
-}
-
-// Forgejo home instance: only reachable while your PC is on.
-// Falls back to last-known cached stats from localStorage when offline.
-async function loadForgejoWithCache(entry, user, base) {
-  const cacheKey = `forgejo-stats-${user}`;
-  try {
-    const res = await fetch(`${base}/api/v1/users/${user}`, { signal: AbortSignal.timeout(4000) });
-    if (!res.ok) throw new Error('unreachable');
-    const d = await res.json();
-
-    let stars = 0;
-    const reposRes = await fetch(`${base}/api/v1/users/${user}/repos?limit=50`);
-    if (reposRes.ok) {
-      const repos = await reposRes.json();
-      stars = Array.isArray(repos) ? repos.reduce((sum, r) => sum + (r.stars_count || 0), 0) : 0;
-    }
-
-    const snapshot = {
-      repos: d.public_repos ?? '—',
-      followers: d.followers_count ?? '—',
-      stars,
-      syncedAt: new Date().toISOString(),
-    };
-    localStorage.setItem(cacheKey, JSON.stringify(snapshot));
-
-    set(entry, 'status', '● online');
-    entry.querySelector('[data-field="status"]').style.color = 'var(--accent)';
-    set(entry, 'repos', snapshot.repos);
-    set(entry, 'followers', snapshot.followers);
-    set(entry, 'stars', snapshot.stars);
-  } catch (e) {
-    const cached = localStorage.getItem(cacheKey);
-    set(entry, 'status', '○ offline');
-    entry.querySelector('[data-field="status"]').style.color = 'var(--text-faint)';
-    if (cached) {
-      const s = JSON.parse(cached);
-      set(entry, 'repos', s.repos);
-      set(entry, 'followers', s.followers);
-      set(entry, 'stars', s.stars);
-      const note = entry.querySelector('[data-field="cache-note"]');
-      if (note) note.textContent = `showing cached stats from ${new Date(s.syncedAt).toLocaleString()} — PC is off right now`;
-    } else {
-      const note = entry.querySelector('[data-field="cache-note"]');
-      if (note) note.textContent = 'no cached stats yet — turn on the instance once to sync';
-    }
-  }
-}
-
-function set(entry, field, value) {
-  const el = entry.querySelector(`[data-field="${field}"]`);
-  if (el) {
-    el.textContent = value;
-    el.classList.add('add');
-  }
-}
-
-function fail(entry) {
-  const block = entry.querySelector('.stat-block');
-  if (block) {
-    block.classList.remove('loading');
-    block.classList.add('error');
-    block.innerHTML = '<p>couldn\'t fetch stats — check username / CORS</p>';
-  }
-}
-
-function done(entry) {
-  const block = entry.querySelector('.stat-block');
-  if (block) block.classList.remove('loading');
-}
-
-document.querySelectorAll('.entry[data-platform]').forEach(entry => {
-  const platform = entry.dataset.platform;
-  const user = entry.dataset.user;
-  if (!user || user === 'yourusername') return; // skip placeholders, incl. forgejo until configured
-
-  const handlers = {
-    github: () => loadGitHub(entry, user),
-    gitlab: () => loadGitLab(entry, user),
-    codeberg: () => loadGitea(entry, user, 'https://codeberg.org'),
-    forgejo: () => loadForgejoWithCache(entry, user, entry.dataset.instance),
-  };
-
-  const run = handlers[platform];
-  if (!run) return;
-
-  run().then(() => done(entry)).catch(() => fail(entry));
+document.documentElement.classList.add('js');
+document.getElementById('themeBtn').addEventListener('click', function () {
+  var r = document.documentElement, t = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  r.setAttribute('data-theme', t);
+  nexncSet(t);
 });
 </script>
 </body>
