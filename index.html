@@ -33,6 +33,14 @@
   nav a:hover { color: var(--accent); padding-left: .35rem; }
   nav a .prompt { font-family: ui-monospace, Menlo, monospace; font-size: .85rem; color: var(--muted); opacity: 0; transition: opacity .15s; }
   nav a:hover .prompt, nav a:focus-visible .prompt { opacity: 1; color: var(--accent); }
+  /* Footer rev code: type the hex digits in the data-hex attribute in the footer. Colors go by place from the right. */
+  :root { --p0:#5fd0c4; --p1:#e6c86e; --p2:#e58fb0; --p3:#8fb4ff; }
+  html.light { --p0:#0b6e6e; --p1:#8a6a00; --p2:#a02c63; --p3:#2a55b8; }
+  .rev { font-family: ui-monospace, Menlo, monospace; font-size: .75rem; }
+  .rev::before { content: "rev: 0x"; color: var(--muted); }
+  .rev::after { content: attr(data-hex);
+    background: repeating-linear-gradient(to left, var(--p0) 0 1ch, var(--p1) 1ch 2ch, var(--p2) 2ch 3ch, var(--p3) 3ch 4ch);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
 </style>
 </head>
 <body>
@@ -58,7 +66,7 @@
 
 <footer>
   <span><a href="/LICENSE">AGPLv3</a> &middot; &copy; 2026</span>
-  <span style="font-family: monospace; font-size: .75rem;">nix-flake: v0.075</span>
+  <span class="rev" data-hex="4B"></span>
 </footer>
 
 <script>
