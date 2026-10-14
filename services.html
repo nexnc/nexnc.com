@@ -2,11 +2,13 @@
 <html lang="en" class="dark">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem('nexnc-theme')==='light')document.documentElement.className='light'}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Services: NEXNC</title>
 <meta name="description" content="Custom NixOS deployments, reproducible Flake architectures, CI/CD with Nix caching, and Linux kernel and systems debugging.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141b1a'/%3E%3Ctext y='70' x='10' fill='%235fd0c4' font-family='monospace' font-weight='bold' font-size='70'%3E%26gt;_%3C/text%3E%3C/svg%3E">
 <style>
+  @view-transition { navigation: auto; }
   :root { --bg:#141b1a; --ink:#e6ece9; --muted:#8fa09b; --rule:#2b3836; --accent:#5fd0c4; color-scheme: dark; }
   html.light { --bg:#f3f5f4; --ink:#17211f; --muted:#5d6b68; --rule:#cfd8d5; --accent:#0b6e6e; color-scheme: light; }
   *, *::before, *::after { box-sizing: border-box; }
