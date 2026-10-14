@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Services: NEXNC</title>
+<meta name="description" content="Custom NixOS deployments, reproducible Flake architectures, CI/CD with Nix caching, and Linux kernel and systems debugging.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141b1a'/%3E%3Ctext y='70' x='10' fill='%235fd0c4' font-family='monospace' font-weight='bold' font-size='70'%3E%26gt;_%3C/text%3E%3C/svg%3E">
+<style>
+  :root { --bg:#141b1a; --ink:#e6ece9; --muted:#8fa09b; --rule:#2b3836; --accent:#5fd0c4; color-scheme: dark; }
+  html.light { --bg:#f3f5f4; --ink:#17211f; --muted:#5d6b68; --rule:#cfd8d5; --accent:#0b6e6e; color-scheme: light; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body { background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; transition: background-color .25s, color .25s; }
+  .theme-toggle { position: fixed; top: calc(1.25rem + env(safe-area-inset-top, 0px)); right: 1.25rem; z-index: 100; display: flex; align-items: center; justify-content: center;
+    background: transparent; border: 1px solid var(--rule); color: var(--muted); padding: .45rem; border-radius: 50%; cursor: pointer; transition: all .2s; }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: scale(1.05); }
+  .theme-toggle svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  main { flex: 1; width: 100%; max-width: 40rem; margin: 0 auto; padding: 2rem 1.5rem; display: flex; flex-direction: column; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  footer { max-width: 40rem; width: 100%; margin: 0 auto; padding: 1.5rem; color: var(--muted); font-size: .85rem; display: flex; justify-content: space-between; align-items: center; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+  main { padding-top: 3rem; }
+  .back { align-self: flex-start; display: inline-flex; align-items: center; gap: .5rem; padding: .5rem 1rem; border: 1px solid var(--rule); border-radius: 6px;
+    color: var(--ink); text-decoration: none; font-weight: 500; font-size: .95rem; transition: color .15s, border-color .15s; }
+  .back:hover { color: var(--accent); border-color: var(--accent); }
+  h1 { font-size: clamp(1.6rem, 5vw, 2.1rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.15; margin: 2.5rem 0 .75rem; }
+  .lede { color: var(--muted); margin: 0 0 2rem; }
+  section { border-top: 1px solid var(--rule); padding: 1.25rem 0; }
+  h2 { margin: 0 0 .6rem; font-size: 1.1rem; font-weight: 600; color: var(--accent); }
+  ul { margin: 0; padding-left: 1.2rem; color: var(--muted); font-size: .95rem; }
+  li { margin: .3rem 0; }
+  code { font-family: ui-monospace, Menlo, monospace; background: var(--rule); padding: .1rem .35rem; border-radius: 3px; color: var(--ink); font-size: .85em; }
+  .hire { border: 1px solid var(--rule); border-radius: 6px; padding: 1.25rem 1.5rem; margin-top: 1rem; background: rgba(127,127,127,.06); }
+  .hire h2 { color: var(--ink); }
+  .hire p { margin: 0 0 .75rem; color: var(--muted); font-size: .95rem; }
+  .hire p:last-child { margin: 0; }
+  .hire a { color: var(--accent); text-underline-offset: 3px; }
+  .hire strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <svg id="sunIcon" style="display:none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  <svg id="moonIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
+<main>
+  <a href="https://nexnc.com" class="back" aria-label="Back to nexnc.com home">&larr; Home</a>
+
+  <h1>Systems Infrastructure &amp; Linux Services</h1>
+  <p class="lede">Custom NixOS deployments, reproducible Flake architectures, and Linux kernel and system debugging.</p>
+
+  <section>
+    <h2>1. NixOS Infrastructure &amp; Flake Refactoring</h2>
+    <ul>
+      <li>Migration from traditional distributions (Ubuntu, Debian, Arch) to NixOS.</li>
+      <li>Modular Flake architecture for system configs, Home Manager, and multi-host setups.</li>
+      <li>Custom ISO and QEMU/KVM image generation, and cloud provider deployment.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. Reproducible Dev Environments &amp; CI/CD</h2>
+    <ul>
+      <li>Custom <code>flake.nix</code> dev shells for Rust, C/C++, Go, and Python.</li>
+      <li>Minimal, containerless Docker/OCI images with <code>pkgs.dockerTools</code>.</li>
+      <li>GitHub Actions and GitLab CI optimization with Nix caching (Magic Nix Cache, Attic, Cachix).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. Linux Kernel, Debugging &amp; Performance Tuning</h2>
+    <ul>
+      <li>Crash analysis, systemd unit optimization, and boot/kernel debugging.</li>
+      <li>Storage setups (ZFS/Btrfs with LUKS encryption) and networking configuration.</li>
+    </ul>
+  </section>
+
+  <div class="hire">
+    <h2>How to Work Together</h2>
+    <p><strong>Direct booking:</strong> email your project requirements or system specs to <a href="mailto:hi@nexnc.com">hi@nexnc.com</a> for a custom proposal. Payment by PayPal invoice.</p>
+    <p><strong>Marketplace escrow:</strong> prefer an escrow platform? View my packages and hire me on <a href="https://www.fiverr.com/nexnc_com" target="_blank" rel="noopener">Fiverr</a>.</p>
+  </div>
+</main>
+
+<footer>
+  <span><a href="/LICENSE">AGPLv3</a> &middot; &copy; 2026</span>
+  <span style="font-family: monospace; font-size: .75rem;">nix-flake: v0.075</span>
+</footer>
+
+<script>
+  function applyTheme(t) {
+    var d = document.documentElement, light = t === 'light';
+    d.classList.toggle('light', light);
+    d.classList.toggle('dark', !light);
+    document.getElementById('sunIcon').style.display = light ? 'none' : 'block';
+    document.getElementById('moonIcon').style.display = light ? 'block' : 'none';
+    try { localStorage.setItem('nexnc-theme', t); } catch (e) {}
+  }
+  function toggleTheme() { applyTheme(document.documentElement.classList.contains('light') ? 'dark' : 'light'); }
+  var saved = 'dark';
+  try { saved = localStorage.getItem('nexnc-theme') || 'dark'; } catch (e) {}
+  applyTheme(saved);
+</script>
+</body>
+</html>
