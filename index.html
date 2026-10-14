@@ -1,95 +1,79 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>NEXNC</title>
-<meta name="description" content="NEXNC is an aspiring systems engineer learning Rust, C++, C, Python and Nix, and running NixOS for 4 to 5 years.">
-<link rel="me" href="https://sifa.id/p/nexnc.com">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='black'/><text y='70' x='10' fill='%2300d4ff' font-family='monospace' font-weight='bold' font-size='70'>&gt;_</text></svg>">
+<title>NEXNC: Systems &amp; DevOps Engineer</title>
+<meta name="description" content="NEXNC is a Systems &amp; DevOps Engineer specializing in NixOS, Flakes, and Reproducible Infrastructure.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23141b1a'/%3E%3Ctext y='70' x='10' fill='%235fd0c4' font-family='monospace' font-weight='bold' font-size='70'%3E%26gt;_%3C/text%3E%3C/svg%3E">
 <style>
-  :root {
-    --bg: #f3f5f4;
-    --ink: #17211f;
-    --muted: #5d6b68;
-    --rule: #cfd8d5;
-    --accent: #0b6e6e;
-    color-scheme: light dark;
-    box-sizing: border-box;
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #141b1a; --ink: #e6ece9; --muted: #8fa09b; --rule: #2b3836; --accent: #5fd0c4;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #141b1a; --ink: #e6ece9; --muted: #8fa09b; --rule: #2b3836; --accent: #5fd0c4;
-  }
-  *, *::before, *::after { box-sizing: inherit; }
-  html, body { height: 100%; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    display: flex;
-    flex-direction: column;
-  }
-  main {
-    flex: 1;
-    width: 100%;
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  h1 {
-    margin: 0;
-    font-size: clamp(4rem, 20vw, 8rem);
-    font-weight: 800;
-    letter-spacing: -0.06em;
-    line-height: 0.95;
-  }
-  h1 span { color: var(--accent); }
-  .role { margin: 1.25rem 0 2.5rem; color: var(--muted); }
-  nav { border-top: 1px solid var(--rule); }
-  nav a {
-    display: block;
-    padding: 0.7rem 0;
-    border-bottom: 1px solid var(--rule);
-    color: var(--ink);
-    text-decoration: none;
-  }
-  nav a:hover { color: var(--accent); }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-  footer {
-    max-width: 40rem;
-    width: 100%;
-    margin: 0 auto;
-    padding: 1.5rem;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  footer a { color: var(--muted); text-underline-offset: 3px; }
+  :root { --bg:#141b1a; --ink:#e6ece9; --muted:#8fa09b; --rule:#2b3836; --accent:#5fd0c4; color-scheme: dark; }
+  html.light { --bg:#f3f5f4; --ink:#17211f; --muted:#5d6b68; --rule:#cfd8d5; --accent:#0b6e6e; color-scheme: light; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body { background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; transition: background-color .25s, color .25s; }
+  .theme-toggle { position: fixed; top: calc(1.25rem + env(safe-area-inset-top, 0px)); right: 1.25rem; z-index: 100; display: flex; align-items: center; justify-content: center;
+    background: transparent; border: 1px solid var(--rule); color: var(--muted); padding: .45rem; border-radius: 50%; cursor: pointer; transition: all .2s; }
+  .theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: scale(1.05); }
+  .theme-toggle svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  main { flex: 1; width: 100%; max-width: 40rem; margin: 0 auto; padding: 2rem 1.5rem; display: flex; flex-direction: column; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  footer { max-width: 40rem; width: 100%; margin: 0 auto; padding: 1.5rem; color: var(--muted); font-size: .85rem; display: flex; justify-content: space-between; align-items: center; }
+  footer a { color: var(--muted); text-decoration: none; }
   footer a:hover { color: var(--accent); }
+  main { justify-content: center; }
+  h1 { margin: 0; font-size: clamp(3.8rem, 18vw, 7.5rem); font-weight: 800; letter-spacing: -.06em; line-height: .95; user-select: none; }
+  h1 span { color: var(--accent); }
+  .role { margin: 1.25rem 0 2.5rem; color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.15rem); max-width: 34rem; }
+  nav { border-top: 1px solid var(--rule); }
+  nav a { display: flex; justify-content: space-between; align-items: center; padding: .75rem 0; border-bottom: 1px solid var(--rule);
+    color: var(--ink); text-decoration: none; font-weight: 500; transition: color .15s, padding-left .15s; }
+  nav a:hover { color: var(--accent); padding-left: .35rem; }
+  nav a .prompt { font-family: ui-monospace, Menlo, monospace; font-size: .85rem; color: var(--muted); opacity: 0; transition: opacity .15s; }
+  nav a:hover .prompt, nav a:focus-visible .prompt { opacity: 1; color: var(--accent); }
 </style>
 </head>
 <body>
+
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+  <svg id="sunIcon" style="display:none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  <svg id="moonIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+</button>
+
 <main>
   <h1>nex<span>nc</span></h1>
-  <p class="role">Aspiring systems engineer.<br>Rust, C++, C, Python and Nix.</p>
+  <p class="role">Systems &amp; DevOps Engineer specializing in <br>NixOS, Flakes, and Reproducible Infrastructure.</p>
+
   <nav aria-label="Primary">
-    <a href="/notes">Notes</a>
-    <a href="/git">Git</a>
-    <a href="https://me.nexnc.com">Links</a>
-    <a href="cv.pdf" target="_blank" rel="noopener noreferrer">CV</a>
-    <a href="mailto:hi@nexnc.com">Contact</a>
+    <a href="/notes"><span>Notes</span><span class="prompt">_&gt;</span></a>
+    <a href="/services.html"><span>Services</span><span class="prompt">_&gt;</span></a>
+    <a href="/git"><span>Git</span><span class="prompt">_&gt;</span></a>
+    <a href="https://me.nexnc.com" target="_blank" rel="noopener"><span>Links</span><span class="prompt">&#8599;</span></a>
+    <a href="/cv.pdf" target="_blank" rel="noopener"><span>CV</span><span class="prompt">&#8599;</span></a>
+    <a href="mailto:hi@nexnc.com"><span>Contact</span><span class="prompt">@</span></a>
   </nav>
 </main>
-<footer><a href="/LICENSE">AGPLv3</a> &middot; &copy; 2026</footer>
+
+<footer>
+  <span><a href="/LICENSE">AGPLv3</a> &middot; &copy; 2026</span>
+  <span style="font-family: monospace; font-size: .75rem;">nix-flake: v0.075</span>
+</footer>
+
+<script>
+  function applyTheme(t) {
+    var d = document.documentElement, light = t === 'light';
+    d.classList.toggle('light', light);
+    d.classList.toggle('dark', !light);
+    document.getElementById('sunIcon').style.display = light ? 'none' : 'block';
+    document.getElementById('moonIcon').style.display = light ? 'block' : 'none';
+    try { localStorage.setItem('nexnc-theme', t); } catch (e) {}
+  }
+  function toggleTheme() { applyTheme(document.documentElement.classList.contains('light') ? 'dark' : 'light'); }
+  var saved = 'dark';
+  try { saved = localStorage.getItem('nexnc-theme') || 'dark'; } catch (e) {}
+  applyTheme(saved);
+</script>
 </body>
 </html>
